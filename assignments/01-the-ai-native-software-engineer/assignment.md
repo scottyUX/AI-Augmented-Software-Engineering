@@ -1,5 +1,7 @@
 # Week 1 — Set Up Your AI-Native Environment
 
+**Estimated time: ~2–3 hours.**
+
 ## Overview
 Before we can practice AI-augmented software engineering, everyone needs a working
 **coding agent** and a clean development environment. This week is pass/fail setup:

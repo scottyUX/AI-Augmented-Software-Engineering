@@ -26,3 +26,6 @@ build/
 # Misc
 *.log
 .cache/
+
+# starter-app local databases
+*.db
