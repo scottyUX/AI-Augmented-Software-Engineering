@@ -55,12 +55,13 @@ setup: gateway, model menu + routing rules, secret/key management, budget/rate l
 logging/observability, and how humans stay in the loop. Note the top risks.
 
 ## Deliverables
-Push `ai-team-gateway/` and a `writeup.md` with:
+**Submit the GitHub repository link** for `ai-team-gateway/` and a `writeup.md` with:
 1. Gateway config (models, providers, routing/fallback rules) — keys via env, **never
    committed**.
 2. A results table: cost, latency, and quality per model/route across your benchmark.
 3. Your optimized routing policy and projected cost savings vs. "always use the big model."
 4. The one-page standardized-team-stack proposal.
+5. **What you learned:** 3–5 sentences on treating model calls as team infrastructure.
 
 ## Evaluation (100 pts)
 - 25 — Gateway correctly fronts all calls; 3+ models across 2+ providers.

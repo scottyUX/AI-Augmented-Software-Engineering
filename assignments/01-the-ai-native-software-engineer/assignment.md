@@ -81,8 +81,8 @@ Submit a link to your `ai-native-week1` repo containing:
      the version.
    - A screenshot of your agent completing a task.
    - The exact prompt(s) you gave it, and any corrections you had to make by hand.
-   - 2–3 sentences: what surprised you about working *through* an agent instead of
-     typing the code yourself?
+   - **What you learned:** 2–3 sentences on what surprised you about working *through*
+     an agent instead of typing the code yourself.
 
 ## Evaluation (pass/fail, 20 pts)
 - 10 — Working coding agent, demonstrated with a screenshot.

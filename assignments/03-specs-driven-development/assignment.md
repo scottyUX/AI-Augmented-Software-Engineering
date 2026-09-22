@@ -75,8 +75,8 @@ Take **one** feature or bug from your app and implement it the *unstructured* wa
 a single free-form prompt to your agent, no spec. Briefly compare the two approaches.
 
 ## Deliverables
-Push `spec-kit-week3/` to a GitHub repo (add the instructor as a collaborator if
-private). It must include:
+**Submit the GitHub repository link** for `spec-kit-week3/` (add the instructor as a
+collaborator if private). It must include:
 1. The generated **spec artifacts** in `.specify/` (constitution, spec, plan, tasks,
    convergence report) — committed, not gitignored.
 2. The **working application** produced by `/speckit-implement`.
@@ -87,7 +87,8 @@ private). It must include:
    - The convergence outcome and how many implement→converge rounds it took.
    - **Part 3 comparison:** spec-driven vs. vibe-coded — which was faster, which was
      more correct, and when you'd choose each.
-   - 3–4 sentences on where SDD felt like overhead and where it clearly paid off.
+   - **What you learned:** 3–4 sentences on where SDD felt like overhead and where it
+     clearly paid off.
 
 ## Evaluation (100 pts)
 - 30 — Complete, committed spec artifacts for all stages (constitution → converge).

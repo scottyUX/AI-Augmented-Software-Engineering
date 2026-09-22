@@ -45,13 +45,15 @@ API* — not the productivity/notes integrations from typical examples.
    HTTP transport with audience validation (never pass tokens through to the upstream API).
 
 ## Deliverables
-- Source under `mcp-data-explorer/` with a clear entrypoint (`server/main.py` or similar).
+**Submit the GitHub repository link** for `mcp-data-explorer/`, containing:
+- Source with a clear entrypoint (`server/main.py` or similar).
 - `README.md` with:
   - Prerequisites, env setup, and run instructions (local and/or remote).
   - How to register the server in an MCP client / agent runtime.
   - **Tool reference:** names, parameters, example inputs/outputs, expected behavior.
 - A short `writeup.md`: which API and endpoints, your two+ tools, how you handled
-  errors and rate limits, and one transcript of an agent using your tools.
+  errors and rate limits, one transcript of an agent using your tools, and **what you
+  learned** (3–5 sentences on controlling what context an agent can reach).
 
 ## Evaluation (90 pts)
 - **Functionality (35):** 2+ working tools, correct API integration, useful outputs.

@@ -54,7 +54,8 @@ Beyond building, write a short reflection tying this to the lecture:
   input, what would break first? What guardrails would you add before trusting that?
 
 ## Deliverables
-Under `event-rsvp/`, submit **three** project folders (one per version), each with:
+**Submit the GitHub repository link** for `event-rsvp/`, containing **three** project
+folders (one per version), each with:
 - Source code.
 - `README.md`: prerequisites, install/setup, run, and env configuration.
 - Notes on deviations, known issues, and manual fixes after generation.
@@ -63,6 +64,8 @@ Plus a `writeup.md`:
 - App concept + which stack each version uses.
 - Three app descriptions (one per version).
 - The factory reflection above.
+- **What you learned:** 3–5 sentences comparing building by hand vs. generating, and
+  what it implies for the future of the SDLC.
 
 ## Evaluation (100 pts)
 - 10 — Concept meets the minimum functional scope.

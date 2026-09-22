@@ -61,13 +61,17 @@ PASS/FAIL so you can iterate.
    (tone, correctness, completeness), then produce an improved final reply.
 
 ## Deliverables
-Push `prompting-support-desk/` to a repo containing:
+**Submit the GitHub repository link** for `prompting-support-desk/`, containing:
 1. All six completed files with every `TODO` resolved and their checks passing.
 2. `data/help_center.txt` for the RAG task.
 3. A `writeup.md` with, **per technique**:
    - Your final prompt(s).
    - A sample input and the model's output.
    - 1–2 sentences on how the technique changed the result vs. a naive prompt.
+   - **What you learned:** one line on what this technique taught you about how the
+     model behaves.
+4. A closing paragraph: across all six, **what you learned** about why LLMs are good at
+   structured/coding tasks and where they need scaffolding.
 
 ## Evaluation (60 pts)
 - 10 points per technique: prompt is well-designed **and** the task check passes.

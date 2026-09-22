@@ -10,6 +10,10 @@ against prompt injection.
 **New domain:** a deliberately-vulnerable **online bookstore** API (not the reference's
 notes app).
 
+> **Coding agent — IDE-agnostic.** Use whichever agent you set up in Week 1 (Antigravity
+> by default) for the AI-assisted remediation and triage. Semgrep is the required
+> scanner; the coding agent is your choice.
+
 ## Learning goals
 - Run SAST/SCA and secret scanning; triage and remediate real findings.
 - Understand prompt injection and agent-specific attack surfaces.
@@ -58,13 +62,15 @@ Ensure the app still runs and tests still pass.
    not trust it?
 
 ## Deliverables
-Push `vuln-bookstore/` and a `writeup.md` with:
+**Submit the GitHub repository link** for `vuln-bookstore/` and a `writeup.md` with:
 1. **Findings overview:** categories Semgrep reported (SAST/Secrets/SCA); any false
    positives you ignored and why.
 2. **Three fixes (before → after):** file + line, rule/category, risk, your change
    (diff + AI-tool usage), why it mitigates the issue, and the clean re-scan.
 3. **Prompt injection:** the working attack, your mitigations, and proof it's blocked.
 4. **Agent-assisted triage:** the agent's plan and your critique of it.
+5. **What you learned:** 3–5 sentences on how AI both speeds up remediation and creates
+   new attack surfaces.
 
 ## Evaluation (100 pts)
 - 35 — Three+ correct, verified remediations across categories (with clean re-scans).
