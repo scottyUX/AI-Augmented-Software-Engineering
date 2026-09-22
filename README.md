@@ -8,16 +8,18 @@ This repository collects lecture notes, slides, code examples, assignments, and 
 
 AI-augmented software engineering is the practice of using AI systems — code assistants, agents, and LLM-based tooling — as active collaborators across the software development lifecycle. This course covers both the *how* (practical use of these tools) and the *why* (their strengths, limits, and implications for engineering practice).
 
-## Topics
+## Lectures
 
-- Foundations of large language models for code
-- AI pair programming and code assistants
-- Prompt engineering for software tasks
-- AI agents and multi-step automation
-- Testing, review, and quality with AI in the loop
-- Requirements, design, and documentation with AI
-- Ethics, security, and responsible use
-- Case studies and hands-on projects
+1. [The AI-Native Software Engineer](lectures/01-the-ai-native-software-engineer/) — the vibe-coding trap, the role transformation from implementer to orchestrator, human-in-the-loop, and career implications.
+2. [Anatomy of Coding Agents](lectures/02-anatomy-of-coding-agents/) — how LLMs work, the model landscape, why LLMs are good at coding, and coding agents under the hood.
+3. [Specs-Driven Development](lectures/03-specs-driven-development/) — the agentic SDLC, when SDD fits, Plan Mode, SDD maturity levels, good specs, and SDD frameworks.
+4. [Advanced Context Management](lectures/04-advanced-context-management/) — a taxonomy of context, context assembly and discovery, the agent runtime pipeline, session management, and MCP fundamentals.
+5. [Agentic Codebase Structure](lectures/05-agentic-codebase-structure/) — skills, rules, and guardrails; CLAUDE.md / AGENTS.md / SKILL.md / intent.md; hooks; and subagent patterns.
+6. [Agentic Code Review and Testing](lectures/06-agentic-code-review-and-testing/) — deterministic guardrails, LLM-based review, safe deployment, runtime safety, and monitoring agents.
+7. [Agent Orchestration](lectures/07-agent-orchestration/) — the generator-critic loop, the goal pattern, the Ralph loop, running multiple agents, and the subagent pattern.
+8. [Security in the Age of AI](lectures/08-security-in-the-age-of-ai/) — SAST/SCA and secret leaks, prompt injection and agent attack surfaces, and agent-assisted triage.
+9. [Software Factory and the Future of Software Engineering](lectures/09-software-factory-and-the-future/) — self-running, self-improving systems and where AI software engineering goes next.
+10. [AI-Native Engineering Teams](lectures/10-ai-native-engineering-teams/) — how AI-native teams work, the standardized team stack, and LLM gateways, model routing, and cost optimization.
 
 ## Repository Structure
 

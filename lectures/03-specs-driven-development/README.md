@@ -1,0 +1,12 @@
+# Lecture 3 — Specs-Driven Development
+
+## Topics
+- Agentic software development life cycle
+- Why do we need SDD?
+- When SDD is not the right fit
+- SDD and human-in-the-loop
+- Plan Mode: the bridge between vibe coding and SDD
+- Three levels of SDD maturity
+- What good specs look like
+- The SDD workflow
+- SDD frameworks
