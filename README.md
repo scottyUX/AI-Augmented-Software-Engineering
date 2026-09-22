@@ -26,9 +26,8 @@ AI-augmented software engineering is the practice of using AI systems — code a
 ```
 .
 ├── lectures/       # Lecture notes and slides, one folder per session
-├── code/           # Code examples and demos
-├── assignments/    # Homework and project briefs
-├── resources/      # Papers, links, and supplementary reading
+├── assignments/    # Homework and project briefs, one folder per lecture
+├── resources/      # Papers, links, and supplementary reading, one folder per lecture
 └── README.md
 ```
 
