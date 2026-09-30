@@ -29,6 +29,11 @@ uv tool install specify-cli
 specify init spec-kit-week2 --integration copilot
 cd spec-kit-week2
 ```
+
+Tip: The `copilot` value is only an example. Check the Integration Keys reference above and use the key that matches the coding agent you set up in Week 1.
+
+For example, if you are using Antigravity, first check the Integration Keys reference to find the supported key instead of assuming `copilot` is the correct value.
+
 Launch your agent **inside the project directory**. The `/speckit-*` skills run in the
 agent's **chat**, not the terminal.
 
