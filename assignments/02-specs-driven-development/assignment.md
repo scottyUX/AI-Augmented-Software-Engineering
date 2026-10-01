@@ -29,6 +29,13 @@ uv tool install specify-cli
 specify init spec-kit-week2 --integration copilot
 cd spec-kit-week2
 ```
+
+> **Tip for Google Antigravity users:** If you set up Google Antigravity in Week 1, use `--integration agy`:
+> ```bash
+> specify init spec-kit-week2 --integration agy
+> ```
+> This installs the `/speckit-*` slash commands as agent skills under `.agents/skills/`.
+
 Launch your agent **inside the project directory**. The `/speckit-*` skills run in the
 agent's **chat**, not the terminal.
 
