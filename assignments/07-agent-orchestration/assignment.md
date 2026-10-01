@@ -36,6 +36,25 @@ git worktree add ../recipe-task-a -b task-a
 git worktree add ../recipe-task-b -b task-b
 ```
 
+> **Concurrency & Collision Prevention Tips:**
+> - **Port Collisions:** Both agents attempting to run `uvicorn main:app --reload` concurrently will collide on default port 8000 (`Address already in use`). Run the second agent's dev server on a separate port, e.g. `uvicorn main:app --port 8001 --reload`.
+> - **Merging & Worktree Cleanup:** Once both tasks are implemented and verified with tests, merge the feature branches back to `main` and prune the temporary worktree directories:
+>   ```bash
+>   cd ../recipe-task-a
+>   git add .
+>   git commit -m "Complete task A"
+>   cd ../recipe-task-b
+>   git add .
+>   git commit -m "Complete task B"
+>   # Return to the original repository root, then run:
+>   git checkout main
+>   git merge task-a
+>   git merge task-b
+>   git worktree remove ../recipe-task-a
+>   git worktree remove ../recipe-task-b
+>   ```
+
+
 ### Part II — Generator–critic loop (1 task)
 Take **one** task and run a loop: a **generator** agent writes the solution, a **critic**
 agent reviews it against a short rubric (correctness, tests, clarity), and the generator
