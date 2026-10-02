@@ -23,7 +23,7 @@ To keep this to ~3 hours, the feature is **pre-scoped** for you (below).
 
 ## Setup
 Replace `copilot` with your agent's
-[integration key](https://github.github.io/spec-kit/reference/integrations.html):
+[integration key](https://github.github.io/spec-kit/reference/integrations.html) (`agy` for Antigravity):
 ```bash
 uv tool install specify-cli
 specify init spec-kit-week2 --integration copilot
