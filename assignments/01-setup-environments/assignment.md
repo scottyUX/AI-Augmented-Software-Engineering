@@ -87,6 +87,7 @@ Install the GitHub CLI (`gh`) and authenticate:
 
 ```bash
 # macOS
+# If brew is not recognized, install Homebrew first (https://brew.sh/).
 brew install gh
 
 # Windows (via Winget)
