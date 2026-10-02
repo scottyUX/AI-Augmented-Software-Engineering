@@ -19,7 +19,11 @@ retriever) in each file.
 ---
 
 ## Setup
-1. Install **Ollama** (`brew install --cask ollama` / see ollama.com) and run `ollama serve`.
+1. Install **Ollama**:
+   - **macOS:** `brew install --cask ollama`
+   - **Windows/Linux:** download the installer from [ollama.com/download](https://ollama.com/download)
+
+   Then run `ollama serve`.
 2. Pull the model: `ollama pull llama3.1:8b`.
 3. `cd starter && pip install ollama`.
 
