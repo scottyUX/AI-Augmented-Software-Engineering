@@ -19,7 +19,20 @@ retriever) in each file.
 ---
 
 ## Setup
-1. Install **Ollama** (`brew install --cask ollama` / see ollama.com) and run `ollama serve`.
+1. Install **Ollama** and ensure the service is running:
+   ```bash
+   # macOS
+   brew install --cask ollama
+   ollama serve
+
+   # Windows (via Winget)
+   winget install Ollama.Ollama
+
+   # Linux
+   curl -fsSL https://ollama.com/install.sh | sh
+   ollama serve
+   ```
+   > **Tip for Windows users:** If you receive a `bind: address already in use` error when running `ollama serve` on Windows, it means the Ollama service is already running in the background (typically started automatically after installation). You do not need to start it manually. To confirm it is running, you can check `ollama --version`. You can safely ignore the `bind: address already in use` error and proceed with the assignment.
 2. Pull the model: `ollama pull llama3.1:8b`.
 3. `cd starter && pip install ollama`.
 
