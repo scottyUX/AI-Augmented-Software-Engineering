@@ -25,11 +25,11 @@ free Gemini student account** (steps below).
 1. **Git** — install and configure:
    ```bash
    git --version
-   git config --global user.name "Your Name"
-   git config --global user.email "you@example.com"
+   git config --global user.name "Your First Name"
+   git config --global user.email "YourStudentEmail@ucsc.edu"
    ```
-2. **GitHub account** — sign up (use your student email) and add an SSH or HTTPS
-   credential so you can push. 
+2. **GitHub account** — sign up (use your student email) and add an SSH (recommended) or HTTPS
+   credential so you can push
    - **Resource:** [Generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
    - **Resource:** [Creating a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
    
@@ -46,7 +46,7 @@ free Gemini student account** (steps below).
    ```
 
 ## Part 2 — Get a coding agent
-Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
+Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application (Make sure the extension is published by the verified google account).
 
 ### Option A — You already have one
 Confirm it works: open your editor, start the agent, and have it make a trivial
