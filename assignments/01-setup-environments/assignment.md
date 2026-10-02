@@ -87,6 +87,7 @@ Install the GitHub CLI (`gh`) and authenticate:
 
 ```bash
 # macOS
+# If brew is not recognized, install Homebrew first (https://brew.sh/).
 brew install gh
 
 # Windows (via Winget)
@@ -136,12 +137,15 @@ Make your edit to the assignment file(s), then commit with a clear message:
 
 ```bash
 git add assignments/
+git status
 git commit -m "Clarify assignment requirements for better student understanding
 
 - Rewrote confusing section about expected output
 - Added example showing what not to do
 - Fixed typo in code snippet"
 ```
+
+Tip: After running `git add`, use `git status` to review which files are staged for the commit. The files listed under “Changes to be committed” are the ones that will be included.
 
 Push your branch and open a PR:
 
