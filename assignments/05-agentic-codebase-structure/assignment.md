@@ -34,6 +34,10 @@ Read `main.py` and `docs/TASKS.md`.
    → run the hook". (See https://agents.md/.)
 2. **One hook** — a git `pre-commit` hook (or your agent's hook) that runs lint/format +
    `pytest` and **blocks** on failure. Show it catching a bad change.
+   > **Common mistake:** Git does not track files inside `.git/hooks/`. If you use a
+   > native Git pre-commit hook, keep it in a version-controlled location such as
+   > `.githooks/pre-commit` and configure Git with
+   > `git config core.hooksPath .githooks` so the hook is included in your submission.
 3. **One reusable workflow/command** — e.g. a "run tests + summarize failures" command
    using your agent's saved-workflow feature (or a `docs/PLAYBOOKS.md` prompt).
 4. **Subagents** — use planner → implementer → reviewer to complete **one** task from
