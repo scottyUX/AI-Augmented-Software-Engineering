@@ -36,6 +36,8 @@ agent's **chat**, not the terminal.
 > A **quote-of-the-day** page: shows one random quote from a small built-in list, with a
 > "New quote" button, and a way to mark a quote as a favorite that persists on reload.
 
+- **Resource:** [MDN Web Storage API (`Window.localStorage`)](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) — Guide and reference for persisting key-value data across page reloads without a backend.
+
 ## Run the loop
 Invoke each skill in your agent's chat, **reviewing each artifact before continuing**:
 ```text
@@ -68,3 +70,4 @@ collaborator if private), including:
 - Spec Kit: https://github.com/github/spec-kit
 - Quickstart: https://github.github.io/spec-kit/quickstart.html
 - Integration keys: https://github.github.io/spec-kit/reference/integrations.html
+- MDN Web Storage API (`localStorage`): https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage

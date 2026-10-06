@@ -126,6 +126,9 @@ change and making sure it is accurate.
 
 ### Create a branch, commit, and open a PR
 
+- **Resource:** [GitHub Flow Guide](https://docs.github.com/en/get-started/using-github/github-flow) — Branch-based workflow for creating features and collaborating via pull requests.
+- **Resource:** [GitHub CLI `gh pr create` Manual](https://cli.github.com/manual/gh_pr_create) — Official reference for creating and managing pull requests from the command line.
+
 Create a feature branch:
 
 ```bash
@@ -166,3 +169,7 @@ Your pull request appears on the course repo. The instructor will review it ther
 - Tool links and student-verification flows change often; if a link or step has moved,
   find the current equivalent and **document what you actually did** in your writeup —
   adapting to changing tooling is part of being AI-native.
+
+## References
+- GitHub Flow: https://docs.github.com/en/get-started/using-github/github-flow
+- GitHub CLI `gh pr create`: https://cli.github.com/manual/gh_pr_create

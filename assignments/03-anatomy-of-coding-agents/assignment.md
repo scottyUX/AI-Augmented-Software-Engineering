@@ -29,11 +29,15 @@ retriever) in each file.
 ## The four techniques (each has a starter file with a built-in PASS/FAIL check)
 1. **`k_shot_prompting.py`** — classify a support ticket into
    `billing | shipping | returns | technical` using in-context examples.
+   - **Resource:** [Few-Shot Prompting Guide](https://www.promptingguide.ai/techniques/fewshot) — How to format and provide in-context demonstrations to guide model classifications.
 2. **`chain_of_thought.py`** — decide refund eligibility from a policy, reasoning step
    by step and ending in `DECISION: YES/NO`.
+   - **Resource:** [Chain-of-Thought Prompting Guide](https://www.promptingguide.ai/techniques/cot) — Eliciting intermediate reasoning steps to handle multi-step logical decisions.
 3. **`tool_calling.py`** — make the model call `get_order_status(order_id)` and use the result.
+   - **Resource:** [Ollama Tool Support Documentation](https://ollama.com/blog/tool-support) — Official guide on function and tool calling with local models in Ollama.
 4. **`rag.py`** — answer a customer question grounded **only** in `data/help_center.txt`,
    and refuse politely when the answer isn't there.
+   - **Resource:** [Retrieval Augmented Generation (RAG) Guide](https://www.promptingguide.ai/techniques/rag) — Pattern for fetching external knowledge chunks to ground responses and prevent hallucination.
 
 Iterate each prompt until its check passes (`python k_shot_prompting.py`, etc.).
 
@@ -48,3 +52,10 @@ Iterate each prompt until its check passes (`python k_shot_prompting.py`, etc.).
 ## Evaluation (100 pts)
 - 20 per technique (×4 = 80): prompt is well-designed and the check passes.
 - 20 — Writeup with per-technique + closing "what you learned".
+
+## References
+- Prompt Engineering Guide (DAIR.AI): https://www.promptingguide.ai/
+- Few-Shot Prompting: https://www.promptingguide.ai/techniques/fewshot
+- Chain-of-Thought Prompting: https://www.promptingguide.ai/techniques/cot
+- Ollama Tool Support: https://ollama.com/blog/tool-support
+- Retrieval Augmented Generation (RAG): https://www.promptingguide.ai/techniques/rag
