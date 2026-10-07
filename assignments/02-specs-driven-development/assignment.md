@@ -18,8 +18,23 @@ To keep this to ~3 hours, the feature is **pre-scoped** for you (below).
 ---
 
 ## Prerequisites
-- Python **3.11+** and [**uv**](https://github.github.io/spec-kit/install/uv.html).
-- The coding agent you set up in Week 1 (Antigravity by default).
+
+You need:
+
+- Python **3.11 or newer**. Python **3.12**, installed in Week 1, is recommended.
+- [**uv**](https://github.github.io/spec-kit/install/uv.html).
+- The coding agent you set up in Week 1, such as Antigravity.
+
+Verify your setup in a terminal before continuing:
+
+```bash
+python --version
+uv --version
+```
+
+The Python command should report version 3.11 or newer. If `python` is not
+recognized on macOS or Linux, try `python3 --version`. If `uv` is not recognized,
+install it using the [uv installation guide](https://github.github.io/spec-kit/install/uv.html).
 
 ## Setup
 Replace `copilot` with your agent's
