@@ -152,6 +152,10 @@ gh pr create \
   --body "Explains what I improved and why it helps future students."
 ```
 
+**Tip** If you get an error when running 'git push' with a 'Permission Denied' error,
+this likely means that you don't have direct access to 'origin'. To fix this, push
+to your personal fork instead, or use 'gh repo fork' to manage the remotes automatically.
+
 After you submit, the instructor will review the PR. If it is useful and correct,
 your suggestion may be merged into the official course materials.
 
