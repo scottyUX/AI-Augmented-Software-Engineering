@@ -31,6 +31,9 @@ retriever) in each file.
    `billing | shipping | returns | technical` using in-context examples.
 2. **`chain_of_thought.py`** — decide refund eligibility from a policy, reasoning step
    by step and ending in `DECISION: YES/NO`.
+   **TIP** Make sure that the prompt checks all three criteria, these being the time limit,
+   unused condition, and final-sale stutus. We do this so edge cases like used items within 
+   30 days are handled properly.
 3. **`tool_calling.py`** — make the model call `get_order_status(order_id)` and use the result.
 4. **`rag.py`** — answer a customer question grounded **only** in `data/help_center.txt`,
    and refuse politely when the answer isn't there.
