@@ -155,6 +155,36 @@ gh pr create \
 After you submit, the instructor will review the PR. If it is useful and correct,
 your suggestion may be merged into the official course materials.
 
+> ### Troubleshooting: 403 Permission Denied & GitHub Authentication
+>
+> If you encounter a `403 Permission Denied` error when pushing:
+> ```text
+> remote: Permission to scottyUX/AI-Augmented-Software-Engineering.git denied to <your-username>.
+> fatal: unable to access 'https://github.com/scottyUX/...': The requested URL returned error: 403
+> ```
+> This is expected because students do not have direct write access to the upstream course repository.
+>
+> **Step 1: Ensure GitHub CLI is authenticated**  
+> If prompted with `To get started with GitHub CLI, please run: gh auth login`, run:
+> ```bash
+> gh auth login
+> ```
+> Follow the interactive prompts:
+> - **Where do you use GitHub?** → `GitHub.com`
+> - **What is your preferred protocol for Git operations on this host?** → `HTTPS`
+> - **Authenticate Git with your GitHub credentials?** → `Yes`
+> - **How would you like to authenticate GitHub CLI?** → `Login with a web browser`
+>
+> Press **Enter** to open the browser, enter the 8-character one-time code shown in your terminal, and click **Authorize github**.
+>
+> **Step 2: Let `gh` fork and push for you**  
+> After authenticating, run `gh pr create` again. When `gh` detects you cannot push to the main repository, it will prompt:
+> ```text
+> ? Where should we push the 'improve-assignment-clarity' branch?
+> > Create a fork of scottyUX/AI-Augmented-Software-Engineering
+> ```
+> Press **Enter** to select `Create a fork`. `gh` will automatically fork the repository to your account, push your branch, and open the pull request against the course repository.
+
 ## Submission
 Your pull request appears on the course repo. The instructor will review it there.
 
