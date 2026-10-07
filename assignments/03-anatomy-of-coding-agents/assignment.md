@@ -48,3 +48,13 @@ Iterate each prompt until its check passes (`python k_shot_prompting.py`, etc.).
 ## Evaluation (100 pts)
 - 20 per technique (×4 = 80): prompt is well-designed and the check passes.
 - 20 — Writeup with per-technique + closing "what you learned".
+
+## Tip: when `rag.py` fails, check retrieval before the prompt
+If a RAG case fails, the problem is often the **retriever**, not the prompt: if the right
+chunk never reaches the model, the model is *correct* to say it doesn't know. Exact
+word matching is the usual culprit. For "Do you ship internationally?", `ship` ≠
+`shipping` and `internationally` ≠ `international`, so the shipping line is never
+retrieved, while filler words like "you" pull in unrelated lines. Temporarily
+`print(context)` inside `answer()` to see what the model actually received, then improve
+matching (e.g. lowercase, strip punctuation, ignore stopwords, match on word stems or
+prefixes). This is true of real RAG systems too: debug retrieval first.
