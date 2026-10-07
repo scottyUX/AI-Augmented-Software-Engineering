@@ -37,6 +37,21 @@ retriever) in each file.
 
 Iterate each prompt until its check passes (`python k_shot_prompting.py`, etc.).
 
+> **Common Mistake:** the checks are plain string comparisons, so a correct answer in
+> the wrong format still prints `FAIL`. Before rewriting a prompt that looks right, check
+> the output against what each file actually tests:
+>
+> | File | What the check requires | Looks right but fails |
+> | --- | --- | --- |
+> | `k_shot_prompting.py` | The whole reply, lowercased, equals the label exactly. | `Billing.` or `Category: billing` |
+> | `chain_of_thought.py` | The **last line** contains `DECISION: YES` or `DECISION: NO`. | `**DECISION:** YES`, or any sentence after the decision line |
+> | `tool_calling.py` | The first tool call has `order_id` equal to `4412`. The reply text is not checked. | Answering in prose without calling the tool |
+> | `rag.py` | Answers contain `30 days` and `international`; the refusal contains `don't know`, `do not know`, `not sure`, or `cannot`. | `I can't help with that` or `That isn't in our help center` |
+>
+> For `rag.py`, tell the model the exact refusal sentence to use (e.g. *"I don't know."*)
+> rather than asking it to "refuse politely". Also note the starter retriever returns
+> `[]`, so the model sees no help-center text at all until you implement it.
+
 ## Deliverables
 **Submit the GitHub repository link** for your `starter/` folder, containing:
 1. All four files with `TODO`s resolved and their checks passing.
