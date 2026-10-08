@@ -32,6 +32,19 @@ GitHub app so it can comment on PRs.
 **Part I — guardrails.** Add lint+format (black+ruff) and confirm `pytest` fails the
 build on a failing test. Document the commands.
 
+`black` and `ruff` are not in the starter's `requirements.txt`, so install them first:
+```bash
+pip install black ruff
+ruff check .        # lint
+black --check .     # format check (exits non-zero if any file would change)
+pytest              # tests
+```
+
+> **Common Mistake:** the starter's `main.py` is not black-formatted yet, so
+> `black --check .` fails before you change anything. Run `black .` once on `main` and
+> commit it as a baseline **before** branching. Otherwise the reformat lands inside your
+> first feature PR, and both your review and the AI's get buried in formatting noise.
+
 **Part II — two features (from `docs/TASKS.md`).** For **each** of two tasks:
 1. Branch, implement with your agent (one-shot prompt), add/update tests.
 2. **Manually review** the diff line-by-line; note issues (correctness, naming, test
