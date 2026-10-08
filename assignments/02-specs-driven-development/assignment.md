@@ -52,7 +52,9 @@ artifact is vague or wrong, **refine the spec/plan** (not the code) and note wha
 ## Deliverables
 **Submit the GitHub repository link** for `spec-kit-week2/` (add the instructor as a
 collaborator if private), including:
-1. The committed **spec artifacts** in `.specify/` (not gitignored).
+1. The committed **Spec Kit artifacts**: the constitution in
+   `.specify/memory/constitution.md` and the feature artifacts in `specs/<feature>/`
+   (including `spec.md`, `plan.md`, and `tasks.md`); neither location should be gitignored.
 2. The **working page** produced by `/speckit-implement`.
 3. A `writeup.md`: the prompts you gave each skill; one before/after where refining the
    **spec or plan** changed the output; the convergence outcome; and **what you learned**
