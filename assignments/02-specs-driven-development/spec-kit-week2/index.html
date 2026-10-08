@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quote of the Day — Spec-Driven App</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-decor"></div>
+  
+  <main class="app-container">
+    <header class="app-header">
+      <span class="badge">SPEC-DRIVEN DEVELOPMENT</span>
+      <h1>Quote of the Day</h1>
+      <p class="subtitle">Daily inspiration curated for AI-native software engineers</p>
+    </header>
+
+    <article class="quote-card" id="quoteCard">
+      <div class="quote-icon">“</div>
+      <blockquote id="quoteText">Loading quote...</blockquote>
+      <cite id="quoteAuthor">— Loading author</cite>
+
+      <div class="card-actions">
+        <button id="favoriteBtn" class="btn btn-favorite" aria-label="Favorite quote">
+          <svg class="heart-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span id="favText">Favorite</span>
+        </button>
+
+        <button id="newQuoteBtn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          New Quote
+        </button>
+      </div>
+    </article>
+
+    <div class="secondary-actions">
+      <button id="viewFavoritesBtn" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        My Favorites (<span id="favCount">0</span>)
+      </button>
+    </div>
+  </main>
+
+  <!-- Favorites Modal -->
+  <div id="favoritesModal" class="modal-backdrop hidden">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>My Favorite Quotes</h2>
+        <button id="closeModalBtn" class="btn-close" aria-label="Close modal">&times;</button>
+      </header>
+      <div id="favoritesList" class="favorites-list">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
