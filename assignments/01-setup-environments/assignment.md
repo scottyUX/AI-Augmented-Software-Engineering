@@ -102,12 +102,22 @@ gh auth login
 
 Follow the prompts and make sure `gh auth status` confirms you are logged in.
 
-### Clone the course repo
+### Fork and clone the course repo
+
+If you do not have write access to the course repository, pushing directly to it may fail with a permission (403) error. Fork it first to create your own copy on GitHub, then clone your fork:
 
 ```bash
-git clone https://github.com/scottyUX/AI-Augmented-Software-Engineering.git
+gh repo fork scottyUX/AI-Augmented-Software-Engineering --clone
 cd AI-Augmented-Software-Engineering
 ```
+
+This sets up two remotes:
+- `origin` → your fork (you push here)
+- `upstream` → the course repository (you open a PR targeting this repository)
+
+Run `git remote -v` to check.
+
+> **Common Mistake:** If you already cloned the course repository, you do not need to start over. From inside the project folder, run `gh repo fork --remote` to create your fork and configure the remotes.
 
 ### What to improve
 
