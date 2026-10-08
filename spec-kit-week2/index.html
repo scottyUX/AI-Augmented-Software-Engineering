@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f3eb">
+    <meta name="description" content="A quiet moment of inspiration, with a new quote each visit.">
+    <title>A Little Perspective — Quote of the Day</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" aria-label="Site header">
+        <a class="wordmark" href="./" aria-label="A Little Perspective home">
+          <span class="wordmark-mark" aria-hidden="true">✳</span>
+          <span>A LITTLE PERSPECTIVE</span>
+        </a>
+        <span class="header-note">A moment, just for you</span>
+      </header>
+
+      <main id="mainContent" class="main-content">
+        <div class="loading-mark" aria-hidden="true"></div>
+        <p class="eyebrow">A DAILY PAUSE</p>
+        <h1>Find a thought to carry with you.</h1>
+        <p class="intro">A small collection of words worth sitting with.</p>
+        <div id="appContent">
+          <section id="quoteRegion" aria-label="Quote of the day">
+            <article id="quoteCard" class="quote-card" aria-label="Quote of the day">
+              <span class="quote-mark" aria-hidden="true">“</span>
+              <blockquote id="quoteText" class="quote-text" aria-live="polite"></blockquote>
+              <p class="quote-attribution">
+                <span class="attribution-dash" aria-hidden="true">—</span>
+                <span id="quoteAttribution"></span>
+              </p>
+              <div class="quote-actions">
+                <button id="favoriteButton" class="heart-toggle" type="button" aria-label="Add quote to favorites" aria-pressed="false" disabled>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <path d="M20.8 8.7c0 4.2-8.8 10.2-8.8 10.2S3.2 12.9 3.2 8.7a4.5 4.5 0 0 1 8-2.8 4.5 4.5 0 0 1 8 2.8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <button id="newQuoteButton" class="button button-primary" type="button">
+                  <span>New quote</span>
+                  <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                    <path d="M4.2 10h11.6m0 0-4.4-4.4m4.4 4.4-4.4 4.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+            <p id="noQuotesMessage" class="empty-message" role="status" hidden>
+              There are no quotes available just now. Please check back soon.
+            </p>
+          </section>
+          <section id="favoritesRegion" class="favorites-section" aria-labelledby="favoritesHeading">
+            <div class="favorites-heading-row">
+              <div>
+                <p class="eyebrow">KEEP CLOSE</p>
+                <h2 id="favoritesHeading">Saved for later</h2>
+              </div>
+              <span id="favoritesCount" class="favorites-count" aria-live="polite">0 saved</span>
+            </div>
+            <ul id="favoritesList" class="favorites-list" aria-label="Favorite quotes"></ul>
+            <p id="noFavoritesMessage" class="favorites-empty">Your favorite quotes will find a home here.</p>
+          </section>
+        </div>
+        <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+      </main>
+
+      <footer class="site-footer">
+        <span>Take what you need. Leave a little kindness.</span>
+        <span class="footer-spark" aria-hidden="true">✳</span>
+      </footer>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
