@@ -85,6 +85,8 @@ small improvement to the course materials.
 
 Install the GitHub CLI (`gh`) and authenticate:
 
+**Resource (Linux):** [GitHub CLI Linux install guide](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
+
 ```bash
 # macOS
 brew install gh
@@ -93,7 +95,7 @@ brew install gh
 winget install GitHub.cli
 
 # Linux (Ubuntu/Debian)
-# For full keyring setup, visit [https://github.com/cli/cli#installation](https://github.com/cli/cli#installation)
+# Installs from Ubuntu's repo; for the latest gh, set up the keyring via the guide above
 sudo apt update
 sudo apt install gh
 
