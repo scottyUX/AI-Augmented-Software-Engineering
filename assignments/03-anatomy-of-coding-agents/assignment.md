@@ -21,7 +21,7 @@ retriever) in each file.
 ## Setup
 1. Install **Ollama** (`brew install --cask ollama` / see ollama.com) and run `ollama serve`.
 2. Pull the model: `ollama pull llama3.1:8b`.
-3. `cd starter && pip install ollama`.
+3. From the repository root, run `cd assignments/03-anatomy-of-coding-agents/starter && pip install ollama`.
 
 > **Rule:** only edit the parts marked `TODO` (the prompt, and the retriever in `rag.py`).
 > Don't change the model or post-process outputs to fake a pass.
