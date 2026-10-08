@@ -86,10 +86,13 @@ small improvement to the course materials.
 Install the GitHub CLI (`gh`) and authenticate:
 
 ```bash
+# Step 1: Run the terminal command for your operating system
+
 # macOS
 brew install gh
 
 # Windows (via Winget)
+# Close and reopen your terminal after installation to avoid "gh: command not found" errors
 winget install GitHub.cli
 
 # Linux (Ubuntu/Debian)
@@ -97,6 +100,7 @@ winget install GitHub.cli
 sudo apt update
 sudo apt install gh
 
+# Step 2: Authenticate with GitHub CLI
 gh auth login
 ```
 
