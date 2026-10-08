@@ -37,7 +37,7 @@ agent's **chat**, not the terminal.
 > "New quote" button, and a way to mark a quote as a favorite that persists on reload.
 
 ## Run the loop
-Invoke each skill in your agent's chat, **reviewing each artifact before continuing**:
+Invoke each skill in your agent's chat, **reviewing each artifact before continuing** (you can read about what these instructions do [here](https://github.github.io/spec-kit/quickstart.html)):
 ```text
 /speckit-constitution Create principles focused on code quality, testing, and maintainability.
 /speckit-specify A quote-of-the-day page: one random quote from a built-in list, a "New quote" button, and favoriting that persists across reloads.
