@@ -1,23 +1,33 @@
-# Week 2 Writeup — Spec-Driven Development
+## Prompts Used
 
-## 1. Prompts Used
-- **Constitution:** `/speckit-constitution Create principles focused on code quality, testing, and maintainability.`
-- **Specify:** `/speckit-specify A quote-of-the-day page: one random quote from a built-in list, a "New quote" button, and favoriting that persists across reloads.`
-- **Specify Refinement:** `/speckit-specify Update the spec to explicitly require a heart icon toggle for favoriting and a minimum of 5 default quotes in the built-in list.`
-- **Plan:** `/speckit-plan Use plain HTML/CSS/JavaScript, no backend; persist favorites in localStorage.`
-- **Tasks:** `/speckit-tasks`
-- **Implement:** `/speckit-implement`
-- **Converge:** `/speckit-converge`
+### 1. Initial Spec-Driven Loop
+- **Constitution:**
+  `/speckit-constitution Create principles focused on code quality, testing, and maintainability.`
+- **Specify:**
+  `/speckit-specify A quote-of-the-day page: one random quote from a built-in list, a "New quote" button, and favoriting that persists across reloads.`
+- **Plan:**
+  `/speckit-plan Use plain HTML/CSS/JavaScript, no backend; persist favorites in localStorage.`
+- **Tasks:**
+  `/speckit-tasks`
+- **Implement:**
+  `/speckit-implement`
+- **Converge:**
+  `/speckit-converge`
 
-## 2. Spec/Plan Refinement
-Before: The original spec didn't specify favoriting UI elements or quote count.
+### 2. Spec Refinement Loop
+- **Specify Refinement:**
+  `/speckit-specify Refine the spec to ensure the quote text fades in smoothly over 0.5 seconds whenever a new quote is loaded.`
+- **Plan:**
+  `/speckit-plan`
+- **Tasks:**
+  `/speckit-tasks`
+- **Implement:**
+  `/speckit-implement`
+- **Converge:**
+  `/speckit-converge`
 
-Post-Refinement: The new spec required a heart icon toggle with visual state changes and a pre-loaded array with at least 5 default quotes.
+  ## Convergence Outcome
+After completing the initial implementation and the animation refinement, I ran the `/speckit-converge` command. The agent successfully reported full convergence with zero gaps detected. This confirmed that the final codebase perfectly matched all specifications, plans, and tasks without requiring any manual code edits.
 
-Impact: The generated codebase and UI components managed the heart icon SVG and populated the quote list as requested.
-
-## 3. Convergence Outcome
-The initial `/speckit-converge` flagged missing automated test iterations required by success criteria SC-001 through SC-003. It automatically appended tasks T017–T019 to `tasks.md`. Re-running `/speckit-implement` completed those tasks, and running `/speckit-converge` again confirmed all 10 Playwright tests passed successfully.
-
-## 4. What I Learned
-Spec-Driven Development felt like an additional overhead for a small project. It needed formal specification files before any application code could be written. But this paid off at implementation as the agent was able to generate clean, bug-free localStorage persistence and UI components at the first attempt without constant prompt tweaking.
+## Reflection
+The Spec-Driven process initially felt like a lot of overhead, as generating multiple markdown files for specifications, plans, and tasks took time before any actual coding began. However, as someone who appreciates mixing theoretical structure with practical results, the payoff was huge when the agent instantly generated a fully functional, tested application based on those documents. The true value of this workflow really shone during the UI refinement, where simply updating the text specification for the animation automatically cascaded into clean CSS and JavaScript updates without me needing to manually debug the code.

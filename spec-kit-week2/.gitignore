@@ -1,13 +1,19 @@
-node_modules/
-dist/
-build/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+
+# Environment and Logs
 *.log
 .env*
-playwright-report/
-test-results/
+!.env.example
+
+# IDEs and OS
 .DS_Store
 Thumbs.db
-*.tmp
-*.swp
 .vscode/
 .idea/
