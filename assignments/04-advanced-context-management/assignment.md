@@ -28,6 +28,8 @@ python server.py   # runs over STDIO
    error handling, and the model-friendly return shape.
 2. **Implement a second tool**, `get_country_details(name)`, returning currencies,
    languages, borders, and the flag URL — reusing the same error-handling pattern.
+   Example successful return shape:
+   `{"currencies": ["TRY"], "languages": ["Turkish"], "borders": ["ARM", "AZE", "BGR"], "flag_url": "https://..."}`.
 3. **Harden** both tools: empty/invalid input, HTTP errors, timeouts, and no-result cases
    should all return clean, structured messages (never crash the server).
 4. **Register the server** in an MCP client (Claude Desktop or an MCP-aware IDE) and run
