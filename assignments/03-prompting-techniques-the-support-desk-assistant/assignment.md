@@ -23,6 +23,13 @@ retriever) in each file.
 2. Pull the model: `ollama pull llama3.1:8b`.
 3. `cd starter && pip install ollama`.
 
+> **Common mistakes:**
+> - Make sure the Ollama app is running before `ollama pull`; otherwise you'll get a
+>   "could not connect to ollama app" error. On macOS, opening the app is enough.
+> - `llama3.1:8b` is about a 5 GB download and needs at least 8 GB of RAM to run
+>   comfortably. Start the download early.
+> - Quick check that everything works: `ollama run llama3.1:8b "Say hello in one sentence"`.
+
 > **Rule:** only edit the parts marked `TODO` (the prompt, and the retriever in `rag.py`).
 > Don't change the model or post-process outputs to fake a pass.
 
