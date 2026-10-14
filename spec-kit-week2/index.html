@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#eef1e9">
+    <title>The Daily Line</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="src/app.mjs"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="masthead">
+        <a class="wordmark" href="./" aria-label="The Daily Line home">
+          <span class="wordmark-icon" aria-hidden="true">D</span>
+          <span>The Daily Line</span>
+        </a>
+        <p class="masthead-note">A small collection of lasting words</p>
+        <p class="today-date" id="today-date"></p>
+      </header>
+
+      <main class="page-grid">
+        <section class="quote-panel" aria-labelledby="page-title">
+          <div class="quote-heading">
+            <p class="eyebrow">A moment to keep</p>
+            <h1 id="page-title">A line for today.</h1>
+          </div>
+
+          <figure class="quote-display">
+            <p class="quote-index" id="quote-index">DAILY READING <span>/</span> 01</p>
+            <blockquote>
+              <p class="quote-text" id="quote-text" aria-live="polite" aria-atomic="true"></p>
+            </blockquote>
+            <figcaption class="quote-attribution">
+              <span class="attribution-rule" aria-hidden="true"></span>
+              <cite id="quote-attribution"></cite>
+            </figcaption>
+          </figure>
+
+          <div class="quote-actions">
+            <button class="button button-primary" id="new-quote-button" type="button">
+              <span class="button-icon" aria-hidden="true">↻</span>
+              New quote
+            </button>
+            <button class="button button-save" id="favorite-button" type="button" aria-pressed="false" hidden>
+              <span class="favorite-icon" aria-hidden="true">♡</span>
+              <span id="favorite-button-label">Save favorite</span>
+            </button>
+          </div>
+
+          <p class="storage-status" id="storage-status" role="status" aria-live="polite" hidden></p>
+          <p class="quote-footnote">WORDS FROM THE PUBLIC DOMAIN</p>
+        </section>
+
+        <aside class="favorites-panel" id="favorites-panel" aria-label="Saved favorites" hidden>
+          <div class="favorites-heading">
+            <div class="favorites-heading-copy">
+              <p class="eyebrow">Your collection</p>
+              <h2 id="favorites-title">Saved lines<span class="heading-period">.</span></h2>
+              <span class="favorite-count" id="favorite-count" aria-label="0 saved quotes">00</span>
+            </div>
+            <button class="panel-toggle" id="favorites-toggle" type="button" aria-expanded="true" aria-controls="favorites-content" aria-label="Collapse favorites column" title="Collapse favorites column">
+              <span class="panel-toggle-icon" aria-hidden="true">‹</span>
+            </button>
+          </div>
+          <div class="favorites-content" id="favorites-content" aria-hidden="false">
+            <div class="favorites-content-inner">
+              <p class="empty-state" id="empty-state">No saved lines yet.</p>
+              <ul class="favorites-list" id="favorites-list" aria-label="Favorite quotes"></ul>
+              <p class="favorites-footnote">KEPT CLOSE, ON THIS DEVICE</p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <div class="favorite-toast" id="favorite-toast" role="status" aria-live="polite" aria-atomic="true" hidden>
+        <span class="toast-icon" aria-hidden="true">&#10003;</span>
+        <span id="favorite-toast-message"></span>
+      </div>
+
+      <footer class="site-footer">
+        <span>THE DAILY LINE</span>
+        <span>EST. FOR A QUIETER MOMENT</span>
+      </footer>
+    </div>
+  </body>
+</html>
