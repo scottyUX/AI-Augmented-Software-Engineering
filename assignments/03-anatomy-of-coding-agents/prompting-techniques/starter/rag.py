@@ -22,11 +22,41 @@ def load_chunks() -> list[str]:
 
 # TODO: return the subset of chunks relevant to `question` (simple keyword overlap is fine).
 def YOUR_RETRIEVER(question: str, chunks: list[str]) -> list[str]:
-    return []
+    stopwords = {
+        "a", "an", "the", "i", "you", "your", "my", "is", "are", "do", "does",
+        "to", "of", "in", "on", "for", "how", "what", "where", "have", "can",
+        "it", "item", "items", "this", "that"
+    }
+    stem_map = {
+        "internationally": "international",
+        "returns": "return",
+        "shipping": "ship",
+        "ships": "ship",
+        "refunds": "refund",
+    }
+    words = [w.strip(".,?!:;\"'()[]{}") for w in question.lower().split()]
+    q_tokens = {stem_map.get(w, w) for w in words if w and w not in stopwords}
+
+    scored_chunks = []
+    for chunk in chunks:
+        c_words = [w.strip(".,?!:;\"'()[]{}") for w in chunk.lower().split()]
+        c_tokens = {stem_map.get(w, w) for w in c_words if w}
+        overlap = len(q_tokens & c_tokens)
+        if overlap > 0:
+            scored_chunks.append((overlap, chunk))
+
+    # Sort descending by overlap score
+    scored_chunks.sort(key=lambda item: -item[0])
+    return [chunk for _, chunk in scored_chunks]
 
 
 # TODO: Fill this in! Force the model to answer only from the provided context.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """You are a helpful customer support assistant for an online store.
+Answer the customer's question using ONLY the factual information provided in the Context below.
+Rules:
+1. Answer strictly based on the Context. Do not bring in outside knowledge or make assumptions.
+2. If the Context is empty or does not contain the information needed to answer the question, politely say: "I do not know based on the available information."
+3. Keep the response concise, polite, and directly grounded in the provided text."""
 
 CASES = [
     ("How long do I have to return an item?", ["30 days"]),
