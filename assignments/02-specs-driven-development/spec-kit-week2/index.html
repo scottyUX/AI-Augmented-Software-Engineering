@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote of the Day</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1 class="app-title">Quote of the Day</h1>
+      <p class="app-subtitle">Daily inspiration and timeless wisdom</p>
+    </header>
+
+    <main class="app-main">
+      <article id="quote-card" class="quote-card" aria-live="polite">
+        <blockquote id="quote-text" class="quote-text">
+          Loading quote...
+        </blockquote>
+        <div class="quote-attribution">
+          <span class="attribution-dash" aria-hidden="true">—</span>
+          <cite id="quote-author" class="quote-author">Please wait</cite>
+        </div>
+      </article>
+
+      <section class="controls" aria-label="Quote actions">
+        <button id="btn-favorite" class="btn btn-favorite" type="button" aria-pressed="false" aria-label="Toggle favorite for current quote">
+          <svg id="favorite-icon" class="favorite-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span id="favorite-label" class="btn-label">Favorite</span>
+        </button>
+
+        <button id="btn-new-quote" class="btn btn-primary" type="button">
+          <span class="btn-label">New quote</span>
+        </button>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Built with plain HTML, CSS, and JavaScript.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
+
