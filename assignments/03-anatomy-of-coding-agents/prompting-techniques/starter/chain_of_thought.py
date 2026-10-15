@@ -17,8 +17,26 @@ POLICY = """Refund policy:
 - Final-sale items are never refundable.
 """
 
-# TODO: Fill this in! Encourage step-by-step reasoning, ending with DECISION: YES/NO.
-YOUR_SYSTEM_PROMPT = ""
+# The system prompt checks each policy condition and constrains the final decision line.
+YOUR_SYSTEM_PROMPT = """You are a bot that checks refund conditions. I want you to determine whether the product is eligible for a refund.
+
+Check the following three conditions in order:
+
+1. Was the product purchased within 30 days?
+2. Is the product unused and in its original condition?
+3. Is the product a final-sale item?
+
+For each condition, write the result of your check and a short reason on a separate line.
+
+Use only the provided refund policy and order information. Do not perform any checks or make any assumptions outside the policy.
+
+The final line of your answer must be exactly one of these two options:
+
+DECISION: YES
+DECISION: NO
+
+Do not add any other words, explanations, or punctuation to the final decision line.
+"""
 
 CASES = [
     ("Bought 10 days ago, unused, not final sale.", "YES"),
