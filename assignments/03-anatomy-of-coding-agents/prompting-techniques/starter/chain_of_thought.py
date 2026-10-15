@@ -18,7 +18,22 @@ POLICY = """Refund policy:
 """
 
 # TODO: Fill this in! Encourage step-by-step reasoning, ending with DECISION: YES/NO.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """You are a customer support agent evaluating refund eligibility.
+Using the refund policy provided, evaluate the customer's request step-by-step:
+1. Purchase Date Check: Was the purchase made within 30 days?
+2. Item Condition Check: Is the item unused and in original condition?
+3. Sale Type Check: Is the item non-final-sale (i.e. not marked as final sale)?
+
+All three conditions must be satisfied for a refund to be approved. If any condition is violated or not met, the refund must be denied.
+
+Provide a concise, step-by-step reasoning for each condition.
+Then, conclude your response with the decision on the very last line.
+The very last line of your response MUST be exactly either:
+DECISION: YES
+or
+DECISION: NO
+
+Do not append any text, punctuation, or comments after this final line."""
 
 CASES = [
     ("Bought 10 days ago, unused, not final sale.", "YES"),
