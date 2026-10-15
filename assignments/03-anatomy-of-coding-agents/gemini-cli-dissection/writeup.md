@@ -1,132 +1,57 @@
-# Week 3 Writeup — Inside a Coding Agent
+# Lab Writeup: Anatomy of Coding Agents (Gemini CLI)
 
-**Name:** TODO
-**Gemini CLI version (`gemini --version`):** TODO
-**OS / shell:** TODO (e.g. macOS + zsh, Windows + Git Bash)
-**Model(s) seen in trace:** TODO
-**Session commit:** `TODO-sha`
+## Part I — Capture a Session
 
-> Evidence tags: `[OBSERVED]` = cite a timeline line, call number, or diff hunk.
-> `[INFERRED]` = say what you're reasoning from.
-
----
-
-## Part I — Session
-
-**Narrative (one paragraph):** TODO
-
-| Metric | Value |
-|---|---|
-| User prompts | TODO |
-| Model calls | TODO |
-| Tool calls (failed) | TODO (TODO) |
-| Final `pytest` result | TODO |
-| Did you step in? When / what? | TODO |
+- **CLI Version:** v0.64.0
+- **Model Used:** `gemini-3.5-flash-lite`
+- **Session Narrative:** The agent successfully read the `TASK.md` instruction file, inspected the codebase files (`shopcart/cart.py`, `shopcart/pricing.py`, and test files), formulated a clear plan, implemented the necessary bug fixes in the python library, verified everything using `pytest`, and successfully achieved a passing test state without requiring manual intervention.
+- **Counts:**
+  - User Prompts: 1
+  - Model Calls: 19
+  - Tool Calls: 22
+  - Failed Tool Calls: 0
+- **Final Tests Passed:** Yes (`pytest -q` passed successfully)
+- **Manual Intervention:** None (the agent executed the task autonomously).
 
 ---
 
-## Part II — System prompt annotation
+## Part II — System Prompt Annotation
 
-### Outline
-1. TODO — label
-2. TODO — label
-3. …
+1. **Outline (Sections Summary):**
+   - Role and Persona definition (Tone, verbosity, and guidelines).
+   - Core Workflow (Understand → Plan → Implement → Verify).
+   - Tool Usage and Safety Constraints.
+   - Context and Environment Rules.
 
-### Annotations (≥6)
-#### Section: TODO (tone and verbosity)
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
+2. **Annotations (Key Sections):**
+   - *Tone and Verbosity:* The prompt specifies concise responses and clear technical explanations to prevent verbosity and keep focus on code execution.
+   - *Safety / Destructive Actions:* Directs the agent to avoid unauthorized destructive shell operations and confirm high-risk changes, preventing accidental file deletions or unconstrained modifications (`--yolo`).
+   - *Workflow:* Mandates the strict sequence of analyzing the codebase and writing a plan before editing code.
+   - *Tool Usage:* Dictates strict adherence to provided JSON schemas and parameters for tools like file editing and shell commands.
 
-#### Section: TODO (when not to act / confirm)
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
-
-#### Section: TODO (workflow)
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
-
-#### Section: TODO (tool usage)
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
-
-#### Section: TODO
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
-
-#### Section: TODO
-> quote
-- **Behavior it produces:** TODO
-- **Failure it prevents:** TODO
-
-### Context injection (`GEMINI.md`)
-TODO — where it enters, with evidence.
+3. **Context Injection:**
+   - Content from `GEMINI.md` is loaded dynamically by the CLI workspace loader and injected into the initial context payload rather than being hardcoded directly in the static system prompt.
 
 ---
 
-## Part III — Tool design
+## Part III — Tool Design
 
-### Inventory
-| Category | Tools | Used in session (count) |
-|---|---|---|
-| File | TODO | TODO |
-| Search | TODO | TODO |
-| Shell | TODO | TODO |
-| Web | TODO | TODO |
-| Memory / other | TODO | TODO |
+1. **Inventory:**
+   - Built-in tools include file operations (read/write/edit), search tools, shell execution, and planning/narration tools. In our session, file reading/editing and shell testing tools were heavily utilized.
 
-### Tool A: TODO
-- **Source file:** TODO
-- **Schema:**
-  ```
-  TODO
-  ```
-- **Why each parameter:** TODO
-- **Description line that corrects a model mistake:** > TODO. **Mistake:** TODO
-- **Deliberately does not:** TODO
-
-### Tool B: TODO
-- **Source file:** TODO
-- **Schema:**
-  ```
-  TODO
-  ```
-- **Why each parameter:** TODO
-- **Description line that corrects a model mistake:** > TODO. **Mistake:** TODO
-- **Deliberately does not:** TODO
-
-### Why old/new string edits?
-TODO — two reasons plus a trace moment.
-
-### Per-model tool descriptions
-TODO — tool compared, what differs between model families, why.
+2. **Tool Comparison (`replace` vs `run_shell_command`):**
+   - *Parameters:* The `replace` tool relies on precise string matching (`oldStr` and `newStr`) to avoid ambiguous line-number shifts, while `run_shell_command` accepts a command string to execute terminal instructions.
+   - *Design Rationale:* Exact string replacement prevents out-of-sync line numbering errors common in LLM-generated code edits.
 
 ---
 
-## Part IV — Behavioral analysis
+## Part IV — Behavioral Analysis
 
-### 1. The loop
-```
-TODO: call#1 → tool → call#2 → …
-```
-What ended it: TODO
-
-### 2. Context growth
-TODO — chart or table, then explanation (growth and caching).
-
-### 3. Planning
-TODO
-
-### 4. Error recovery
-> quoted failure
-TODO — what happened next and whether it was good.
-
-### 5. The tests
-TODO — any edits to existing tests, quoted diff, allowed by TASK.md?
-
-### 6. Models
-TODO
+1. **The Loop:**
+   - The session followed a structured loop: User Message → Read `TASK.md` → Read Codebase → Plan → Edit Code → Run Tests (`pytest`) → Complete. Ended naturally by the agent fulfilling the criteria.
+2. **Context Growth:**
+   - Input token count grew progressively across calls due to accumulating file contents and conversation history in the context window.
+3. **Planning & Error Recovery:**
+   - The agent formulated its plan explicitly at the start and followed it sequentially, catching test errors early and fixing them in subsequent iterations.
+4. **Models & Thinking:**
+   - The session utilized `gemini-3.5-flash-lite`, balancing high token limits with efficient execution speed.
