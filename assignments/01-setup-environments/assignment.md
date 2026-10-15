@@ -100,6 +100,11 @@ sudo apt install gh
 gh auth login
 ```
 
+> **Common Mistake:** **Intel Macs:** Homebrew no longer ships prebuilt packages for macOS on Intel x86_64, so `brew install gh` may compile Go and gh from source, which is slow and can fail. Apple Silicon users can still use Homebrew. On Intel Macs:
+> 1. Download `gh_<version>_macOS_amd64.zip` from [the latest GitHub CLI release](https://github.com/cli/cli/releases/latest).
+> 2. Unzip it, then run `sudo cp ~/Downloads/gh_<version>_macOS_amd64/bin/gh /usr/local/bin/`, replacing `<version>` with the downloaded version.
+> 3. Verify with `gh --version`, then continue with `gh auth login`.
+
 Follow the prompts and make sure `gh auth status` confirms you are logged in.
 
 ### Clone the course repo
