@@ -45,6 +45,11 @@ free Gemini student account** (steps below).
    # Note for Linux/macOS users: You may need to run python3 --version instead
    ```
 
+   > **Common Mistake (macOS / Miniconda):** `python` is often missing, and `python3 --version`
+   > can still print 3.11 even after you installed 3.12. Activate your conda env first
+   > (`conda activate base`) and confirm the output is `Python 3.12.x`. If it isn't,
+   > you are looking at a different interpreter than the one Miniconda installed.
+
 ## Part 2 — Get a coding agent
 Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
 
@@ -109,6 +114,25 @@ git clone https://github.com/scottyUX/AI-Augmented-Software-Engineering.git
 cd AI-Augmented-Software-Engineering
 ```
 
+> **Common Mistake:** Cloning this repo does **not** give you push access to
+> `scottyUX/AI-Augmented-Software-Engineering`. `git push -u origin …` will be
+> rejected (`permission denied`) unless you fork first. Use GitHub CLI:
+>
+> ```bash
+> gh repo fork scottyUX/AI-Augmented-Software-Engineering --clone
+> cd AI-Augmented-Software-Engineering
+> ```
+>
+> That sets `origin` to *your* fork and `upstream` to the course repo. Push your
+> branch to `origin`, then open the PR against the course repo:
+>
+> ```bash
+> git push -u origin improve-assignment-clarity
+> gh pr create --repo scottyUX/AI-Augmented-Software-Engineering \
+>   --title "Improve clarity in Assignment 1" \
+>   --body "Explains what I improved and why it helps future students."
+> ```
+
 ### What to improve
 
 Read through **2-3 assignment files** in the `assignments/` folder. Pick one small
@@ -143,11 +167,11 @@ git commit -m "Clarify assignment requirements for better student understanding
 - Fixed typo in code snippet"
 ```
 
-Push your branch and open a PR:
+Push your branch and open a PR (from your fork, targeting the course repo):
 
 ```bash
 git push -u origin improve-assignment-clarity
-gh pr create \
+gh pr create --repo scottyUX/AI-Augmented-Software-Engineering \
   --title "Improve clarity in Assignment 2" \
   --body "Explains what I improved and why it helps future students."
 ```
