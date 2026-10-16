@@ -102,12 +102,16 @@ gh auth login
 
 Follow the prompts and make sure `gh auth status` confirms you are logged in.
 
-### Clone the course repo
+### Fork and clone the course repo
+
+Because you do not have direct push access to the course repository, you must fork it to your personal GitHub account first before opening a pull request. The GitHub CLI can fork and clone it in one step, automatically configuring your remotes:
 
 ```bash
-git clone https://github.com/scottyUX/AI-Augmented-Software-Engineering.git
+gh repo fork scottyUX/AI-Augmented-Software-Engineering --clone
 cd AI-Augmented-Software-Engineering
 ```
+
+*(Alternatively, click **Fork** on the GitHub page and run `git clone https://github.com/<your-username>/AI-Augmented-Software-Engineering.git`)*
 
 ### What to improve
 
@@ -143,13 +147,11 @@ git commit -m "Clarify assignment requirements for better student understanding
 - Fixed typo in code snippet"
 ```
 
-Push your branch and open a PR:
+Push your branch to your personal fork (`origin`) and open a pull request back to the course repository:
 
 ```bash
 git push -u origin improve-assignment-clarity
-gh pr create \
-  --title "Improve clarity in Assignment 2" \
-  --body "Explains what I improved and why it helps future students."
+gh pr create --title "Improve clarity in Assignment 2" --body "Explains what I improved and why it helps future students."
 ```
 
 After you submit, the instructor will review the PR. If it is useful and correct,
