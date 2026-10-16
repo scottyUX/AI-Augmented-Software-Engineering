@@ -21,6 +21,8 @@ To keep this to ~3 hours, the feature is **pre-scoped** for you (below).
 - Python **3.11+** and [**uv**](https://github.github.io/spec-kit/install/uv.html).
 - The coding agent you set up in Week 1 (Antigravity by default).
 
+> **Tip:** To check if uv is installed, run `uv --version` in your terminal. If you see "not recognized", it isn't installed yet, so install it from the link above.
+
 ## Setup
 Replace `copilot` with your agent's
 [integration key](https://github.github.io/spec-kit/reference/integrations.html):
