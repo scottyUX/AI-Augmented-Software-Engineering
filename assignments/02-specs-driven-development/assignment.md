@@ -18,19 +18,65 @@ To keep this to ~3 hours, the feature is **pre-scoped** for you (below).
 ---
 
 ## Prerequisites
-- Python **3.11+** and [**uv**](https://github.github.io/spec-kit/install/uv.html).
+- Python **3.11+** and [**uv**] (https://docs.astral.sh/uv/) (an extremely fast Python package and project manager).
+	- A helpful [Youtube video](https://youtu.be/AMdG7IjgSPM?si=mB6WBExejYmsaFnG) talking about uv - a faster, all-in-one package manager to replace pip and venv
 - The coding agent you set up in Week 1 (Antigravity by default).
 
 ## Setup
-Replace `copilot` with your agent's
-[integration key](https://github.github.io/spec-kit/reference/integrations.html):
+If you don't have `uv` installed yet: ([Reference](https://github.github.io/spec-kit/install/uv.html#macos--homebrew))
+
+### macOS and Linux — Standalone Installer
+The quickest way to install uv on macOS or Linux is the official shell script:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+After the script finishes, follow any instructions printed by the installer to add uv to your `PATH`, then open a new terminal.
+
+### Windows — Standalone Installer
+Run the following in **Command Prompt or PowerShell**:
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+After the script finishes, open a new terminal so the uv binary is on your PATH.
+
+### macOS — Homebrew
+```bash
+brew  install  uv
+```
+
+### Windows — WinGet
+
+```powershell
+winget install --id=astral-sh.uv -e
+```
+
+### Windows — Scoop
+```powershell
+scoop install uv
+```
+
+### Verification
+Confirm that uv is installed and on your `PATH`:
+
+```bash
+uv  --version
+```
+
+You should see output similar to `uv 0.x.y (...)`.
+
+### Further Reading about uv
+
+For advanced options (self-update, proxy settings, uninstall, etc.) see the official [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/).
+
+### Replace `copilot` with your agent's [integration key](https://github.github.io/spec-kit/reference/integrations.html):
 ```bash
 uv tool install specify-cli
 specify init spec-kit-week2 --integration copilot
 cd spec-kit-week2
 ```
-Launch your agent **inside the project directory**. The `/speckit-*` skills run in the
-agent's **chat**, not the terminal.
+Launch your agent **inside the project directory**. The `/speckit-*` skills run in the agent's **chat**, not the terminal.
 
 ## The feature (pre-scoped — build exactly this)
 > A **quote-of-the-day** page: shows one random quote from a small built-in list, with a
@@ -68,3 +114,7 @@ collaborator if private), including:
 - Spec Kit: https://github.com/github/spec-kit
 - Quickstart: https://github.github.io/spec-kit/quickstart.html
 - Integration keys: https://github.github.io/spec-kit/reference/integrations.html
+- uv Documentation: https://docs.astral.sh/uv/
+- uv Video Tutorial: https://youtu.be/AMdG7IjgSPM?si=mB6WBExejYmsaFnG
+
+ 
