@@ -23,6 +23,8 @@ free Gemini student account** (steps below).
 ## Part 1 — Base development environment
 
 1. **Git** — install and configure:
+   Replace `"Your Name"` and `"you@example.com"` with the name and email you want
+   recorded on your commits; do not enter the placeholders literally.
    ```bash
    git --version
    git config --global user.name "Your Name"
