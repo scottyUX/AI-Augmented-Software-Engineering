@@ -82,6 +82,7 @@ This week you will practice the Git workflow we will use all semester by proposi
 small improvement to the course materials.
 
 ### Install GitHub CLI
+> **What is GitHub CLI?** Git tracks your changes and pushes them to GitHub, but some features, such as pull requests, exist only on GitHub's website. The GitHub CLI (`gh`) lets you use those features from your terminal. In this assignment you'll use it to log in (`gh auth login`), which also sets up your Git credentials, and to open your pull request (`gh pr create`). You could open a PR by clicking through github.com instead, but doing it in the terminal keeps the whole workflow in one place, and it's something your coding agent can run too.
 
 Install the GitHub CLI (`gh`) and authenticate:
 
