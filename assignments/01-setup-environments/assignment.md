@@ -102,10 +102,10 @@ gh auth login
 
 Follow the prompts and make sure `gh auth status` confirms you are logged in.
 
-### Clone the course repo
+### Fork and clone the course repo
 
 ```bash
-git clone https://github.com/scottyUX/AI-Augmented-Software-Engineering.git
+gh repo fork scottyUX/AI-Augmented-Software-Engineering --clone
 cd AI-Augmented-Software-Engineering
 ```
 
