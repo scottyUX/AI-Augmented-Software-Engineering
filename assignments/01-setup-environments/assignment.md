@@ -44,7 +44,7 @@ free Gemini student account** (steps below).
    python --version
    # Note for Linux/macOS users: You may need to run python3 --version instead
    ```
-
+> **Tip for Windows Users:** After installing Git or Python via winget, close and reopen VS Code (or your terminal) so your system PATH refreshes before running verification commands.
 ## Part 2 — Get a coding agent
 Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
 
