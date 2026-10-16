@@ -21,12 +21,46 @@ def load_chunks() -> list[str]:
 
 
 # TODO: return the subset of chunks relevant to `question` (simple keyword overlap is fine).
+
 def YOUR_RETRIEVER(question: str, chunks: list[str]) -> list[str]:
-    return []
+    question_lower = question.lower()
+
+    keywords = {
+        "returns": ["return", "refund", "exchange"],
+        "shipping": ["ship", "shipping", "delivery", "international"],
+        "billing": ["payment", "pay", "charged", "billing", "visa", "mastercard", "paypal", "card"],
+        "warranty": ["warranty", "guarantee", "defect"],
+        "support": ["support", "chat", "contact", "hours"],
+    }
+
+    relevant_chunks = []
+
+    for chunk in chunks:
+        category = chunk.split(":")[0].lower()
+        category_keywords = keywords.get(category, [])
+
+        if any(word in question_lower for word in category_keywords):
+            relevant_chunks.append(chunk)
+
+    return relevant_chunks
 
 
 # TODO: Fill this in! Force the model to answer only from the provided context.
-YOUR_SYSTEM_PROMPT = ""
+
+YOUR_SYSTEM_PROMPT = """You are a customer support assistant for an online store.
+
+Answer customer questions using ONLY the information provided in the Context section.
+
+Rules:
+1. Read the provided context carefully.
+2. Answer only with facts explicitly supported by the context.
+3. Do not use outside knowledge or make assumptions.
+4. If the context is empty or does not contain the answer, politely say:
+   "I don't know based on the available help-center information."
+5. Keep your response short, clear, and helpful.
+6. Never invent policies, shipping details, personal information, or other facts.
+"""
+
 
 CASES = [
     ("How long do I have to return an item?", ["30 days"]),
