@@ -45,6 +45,22 @@ free Gemini student account** (steps below).
    # Note for Linux/macOS users: You may need to run python3 --version instead
    ```
 
+   If you choose `uv` (you will also need it for Spec Kit in Week 2):
+   ```bash
+   brew install uv              # or: curl -LsSf https://astral.sh/uv/install.sh | sh
+   uv python install 3.12
+   uv python update-shell       # adds ~/.local/bin to your PATH
+   # close and reopen your terminal, then:
+   python3.12 --version         # should print Python 3.12.x
+   ```
+
+   > **Common Mistake (uv):** `uv python install` puts the interpreter in `~/.local/bin`,
+   > which is often not on your PATH, and it installs it as `python3.12`, not `python`
+   > or `python3`. So `python3 --version` can still print your system Python (e.g.
+   > 3.9 on macOS) even though 3.12 installed correctly. Run `uv python update-shell`,
+   > restart the terminal, and verify with `python3.12 --version`. Inside a project,
+   > `uv venv --python 3.12` creates a `.venv` where `python` is 3.12.
+
 ## Part 2 — Get a coding agent
 Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
 
