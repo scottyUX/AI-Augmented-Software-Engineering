@@ -38,6 +38,8 @@ agent's **chat**, not the terminal.
 
 ## Run the loop
 Invoke each skill in your agent's chat, **reviewing each artifact before continuing**:
+
+> **Tip:** Make sure to run these commands sequentially. Wait for the agent to complete one step and present its output before triggering the next slash command.
 ```text
 /speckit-constitution Create principles focused on code quality, testing, and maintainability.
 /speckit-specify A quote-of-the-day page: one random quote from a built-in list, a "New quote" button, and favoriting that persists across reloads.
