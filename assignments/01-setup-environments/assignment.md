@@ -3,6 +3,7 @@
 **Estimated time: ~2–3 hours.**
 
 ## Overview
+
 Before we can practice AI-augmented software engineering, everyone needs a working
 **coding agent** and a clean development environment. This week is pass/fail setup:
 get your tools installed, verified, and ready to use for Week 2.
@@ -12,6 +13,7 @@ may keep it. **If you do not have one, you will set up Google Antigravity backed
 free Gemini student account** (steps below).
 
 ## Learning goals
+
 - Have a functioning coding agent you can invoke from your editor and/or terminal.
 - Keep a local repo and the GitHub remote in sync yourself: Git does not sync them automatically, so you push your commits and pull before you build on someone else's work.
 - Do feature work on a branch and open a pull request, so unfinished code stays off main and the team can review it before it merges.
@@ -23,37 +25,44 @@ free Gemini student account** (steps below).
 ## Part 1 — Base development environment
 
 1. **Git** — install and configure:
+
    ```bash
    git --version
    git config --global user.name "Your Name"
    git config --global user.email "you@example.com"
    ```
 2. **GitHub account** — sign up (use your student email) and add an SSH or HTTPS
-   credential so you can push. 
+   credential so you can push.
+
    - **Resource:** [Generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
    - **Resource:** [Creating a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
-   
+
    > **Common Mistake:** If you choose HTTPS, you must use a Personal Access Token (PAT) as your password when pushing from the terminal. GitHub no longer accepts standard account passwords for terminal authentication.
+   >
 
    Students: apply for the [GitHub Student Developer Pack](https://education.github.com/pack).
 3. **A terminal + editor** — VS Code is recommended (Antigravity is a VS Code–based
    editor, so this transfers directly).
 4. **A language runtime** for later weeks — install **Python 3.12** (Miniconda/Anaconda
    or `uv` are both fine). Verify:
+
    ```bash
    python --version
    # Note for Linux/macOS users: You may need to run python3 --version instead
    ```
 
 ## Part 2 — Get a coding agent
+
 Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
 
 ### Option A — You already have one
+
 Confirm it works: open your editor, start the agent, and have it make a trivial
 edit (e.g. add a comment to a file) end-to-end. Note which agent and version you're
 using in your writeup.
 
 ### Option B — Set up Google Antigravity + Gemini student account
+
 Use this path if you don't already have a coding agent.
 
 1. **Claim a free Gemini / Google AI Pro student plan.**
@@ -152,17 +161,26 @@ gh pr create \
   --body "Explains what I improved and why it helps future students."
 ```
 
+**Windows PowerShell users:** You can run the pull-request command on a single line instead of using backslashes for line continuation:
+
+```powershell
+gh pr create --title "Improve clarity in Assignment 1" --body "Added a Windows PowerShell example."
+```
+
 After you submit, the instructor will review the PR. If it is useful and correct,
 your suggestion may be merged into the official course materials.
 
 ## Submission
+
 Your pull request appears on the course repo. The instructor will review it there.
 
 ## Evaluation (pass/fail, 20 pts)
+
 - 10 — PR opened against the course repo from a feature branch.
 - 10 — Improvement is thoughtful, scoped, and improves assignment clarity.
 
 ## Notes
+
 - Tool links and student-verification flows change often; if a link or step has moved,
   find the current equivalent and **document what you actually did** in your writeup —
   adapting to changing tooling is part of being AI-native.
