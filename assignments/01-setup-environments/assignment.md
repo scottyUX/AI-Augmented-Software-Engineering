@@ -58,7 +58,7 @@ Use this path if you don't already have a coding agent.
 
 1. **Claim a free Gemini / Google AI Pro student plan.**
    - Go to the [Google AI for students offer](https://gemini.google.com/students)
-     and sign in with your **student Google account**.
+     and sign in with your **personal Google account** (your UCSC email will not work).
    - Follow the verification steps (student email / SheerID) to activate the free
      plan. This gives you access to the Gemini models Antigravity uses.
 2. **Download and install Google Antigravity** (Google's agentic development platform):
