@@ -35,6 +35,8 @@ free Gemini student account** (steps below).
    
    > **Common Mistake:** If you choose HTTPS, you must use a Personal Access Token (PAT) as your password when pushing from the terminal. GitHub no longer accepts standard account passwords for terminal authentication.
 
+   > **Tip for Existing Accounts:** If you already have a personal GitHub account, you do not need to create a new one. Simply add your student email as a secondary address under **GitHub Settings ➔ Emails** to claim student benefits. You can keep your global `git config` email as is, or set a repository-level email using `git config user.email "student@university.edu"`.
+
    Students: apply for the [GitHub Student Developer Pack](https://education.github.com/pack).
 3. **A terminal + editor** — VS Code is recommended (Antigravity is a VS Code–based
    editor, so this transfers directly).
@@ -101,6 +103,8 @@ gh auth login
 ```
 
 Follow the prompts and make sure `gh auth status` confirms you are logged in.
+
+> **Windows PATH Note:** After installing Git or GitHub CLI via Winget on Windows, restart your terminal or VS Code session so environment variables refresh. If `git` or `gh` is still not recognized, verify that the installation paths (e.g. `C:\Program Files\Git\cmd` and `C:\Program Files\GitHub CLI`) are added to your System/User `PATH` environment variable.
 
 ### Clone the course repo
 
