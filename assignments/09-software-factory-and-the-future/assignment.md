@@ -26,7 +26,20 @@ Minimum scope (also in `starter/PROMPT.md`):
 ## What to do
 1. **Generate.** Claim your Bolt credits, paste `starter/PROMPT.md` into
    [bolt.new](https://bolt.new/), and iterate prompts until the app meets the scope above.
-2. **Export** the generated code into your repo under `event-rsvp/`.
+2. **Export** the generated code into your repo under `event-rsvp/`. Bolt offers two
+   routes, and both give you the full source:
+   - **Download a ZIP** — click the project title (top left), then **Export** >
+     **Download**. Unzip it into `event-rsvp/` and run `npm install && npm run dev`
+     locally; the ZIP carries the source, not the installed dependencies.
+   - **Connect to GitHub** — the GitHub control in the toolbar pushes the project to a
+     **new repo of its own, created private**. Copy those files into `event-rsvp/` in
+     the repo you are submitting.
+
+   > **Common Mistake:** Submitting the Bolt-created repo as-is. It is private, so the
+   > instructor cannot open it, and the app sits at that repo's root rather than under
+   > `event-rsvp/`. Before your first commit, also add a `.gitignore` covering
+   > `node_modules/` and `.env` — generated projects pull in hundreds of megabytes of
+   > dependencies that do not belong in version control.
 3. **Evaluate & fix.** Run it. Find at least **two** things the generator got wrong or
    left incomplete (a bug, a missing validation, a security/UX gap) and fix them —
    note whether you fixed them by re-prompting Bolt or by hand.
