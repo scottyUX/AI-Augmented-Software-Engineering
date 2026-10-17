@@ -19,9 +19,17 @@ retriever) in each file.
 ---
 
 ## Setup
-1. Install **Ollama** (`brew install --cask ollama` / see ollama.com) and run `ollama serve`.
-2. Pull the model: `ollama pull llama3.1:8b`.
+1. Install **Ollama** and run `ollama serve`:
+   - macOS: `brew install --cask ollama`
+   - Windows: `winget install Ollama.Ollama` (or the installer from ollama.com), then reopen your terminal
+   - Linux: `curl -fsSL https://ollama.com/install.sh | sh`
+2. Pull the model: `ollama pull llama3.1:8b`. It's a ~5 GB download, so do it before class.
 3. `cd starter && pip install ollama`.
+
+> **Common mistake:** on macOS and Windows the Ollama desktop app starts a server in the
+> background. If `ollama serve` fails with `address already in use` (Windows: `Only one
+> usage of each socket address`), Ollama is already running and you can skip that step.
+> Check with `ollama list`: if it prints a table, the server is up.
 
 > **Rule:** only edit the parts marked `TODO` (the prompt, and the retriever in `rag.py`).
 > Don't change the model or post-process outputs to fake a pass.
