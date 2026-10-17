@@ -135,23 +135,61 @@ I compared `replace`. Both descriptions use the same schema, but the Gemini 3 ve
 ## Part IV — Behavioral analysis
 
 ### 1. The loop
+
+[OBSERVED: `session_timeline.txt`] The tool sequence below reconstructs the original task loop through the agent's final answer.
+
 ```
-TODO: call#1 → tool → call#2 → …
+call #1 → update_topic + read TASK.md → call #2
+→ update_topic + read cart.py/pricing.py/test_cart.py → call #3
+→ update_topic + python -m pytest → calls #4–#7 (environment recovery)
+→ call #8 → update_topic + git status/diff → call #9
+→ update_topic + final pytest → call #10 → update_topic → call #11 (final answer)
 ```
-What ended it: TODO
+[OBSERVED] The agent ended its task itself: after call #10 it updated the topic to a concluding state, and call #11 followed with no further tool call. The later calls #12–#14 belong to my required independent `python -m pytest -q` validation prompt, rather than the agent's original task loop (`session_timeline.txt`, 00:32:30–00:32:39). No usage limit or user intervention ended the agent's work.
 
 ### 2. Context growth
-TODO — chart or table, then explanation (growth and caching).
+
+[OBSERVED: `session_calls.csv`] The table records each response's input-token count and cached-content-token count.
+
+| Call | Input tokens | Cached tokens |
+|---:|---:|---:|
+| 1 | 17,080 | 0 |
+| 2 | 17,702 | 0 |
+| 3 | 20,515 | 16,251 |
+| 4 | 20,785 | 18,269 |
+| 5 | 20,962 | 18,262 |
+| 6 | 21,239 | 18,255 |
+| 7 | 21,590 | 18,250 |
+| 8 | 21,853 | 18,244 |
+| 9 | 24,913 | 20,282 |
+| 10 | 25,655 | 22,301 |
+| 11 | 26,108 | 22,296 |
+| 12 | 26,465 | 24,319 |
+| 13 | 26,759 | 24,313 |
+| 14 | 27,080 | 24,307 |
+
+[OBSERVED] The input context rose from 17,080 tokens at call #1 to 27,080 at call #14, a gain of 10,000 tokens (about 59%). The table is transcribed from `session_calls.csv`. [INFERRED] It grows because later requests carry the original instructions, conversation history, tool requests, and tool results in addition to the newest event, exactly the cost pattern the system prompt warns about in `system.md` lines 15–16. [OBSERVED] Cached tokens were zero for the first two calls and then remained high, reaching 24,319 at call #12. [INFERRED] That indicates a repeated input prefix was served from prompt cache, which can reduce the latency and processing cost of reused context even though the total context still grew.
 
 ### 3. Planning
-TODO
+[OBSERVED] The agent used `update_topic` six times and did not call `enter_plan_mode`, `write_todos`, or a subagent. Its updates cover initialization (call #1), codebase research (call #2), test/environment investigation (call #3), post-test review (call #8), validation (call #9), and conclusion (call #10) (`session_timeline.txt`). This aligns with the system prompt's Topic Updates guidance, which says to update the topic for an unexpected environment issue (`system.md` lines 52–63). [OBSERVED] Its apparent plan was research → run tests → repair/validate → conclude. The implementation and 17-passing-test result are recorded in session commit `7b06006`. [INFERRED] The long detour through three unavailable Python/pytest invocations and a filesystem search was not part of the intended plan, it was an environment-recovery detour.
 
 ### 4. Error recovery
-> quoted failure
-TODO — what happened next and whether it was good.
+
+> [OBSERVED: raw telemetry output for the 00:29:15 shell call] `/bin/bash: line 3: python: command not found`
+
+[OBSERVED] The first test command was `python -m pytest -q` at 00:29:15. After its failure the agent tried `python3 -m pytest -q` (00:29:17), then `.venv/bin/pytest` (00:29:19), then a `find /` search (00:31:18), and ultimately an explicit project-virtual-environment pytest path (00:31:53), which led to its “17 passed” update at 00:31:56 (`session_timeline.txt`). The telemetry summary still counts zero *failed tool calls* because each `run_shell_command` invocation itself returned normally. The unsuccessful commands are failures reported by the shell command output. [OBSERVED: summary plus timeline timestamps] [INFERRED] The recovery was successful because it reached a passing suite without help, but it was inefficient and broader than necessary: activating or locating the already-created project `.venv` directly would have avoided the filesystem-wide search.
 
 ### 5. The tests
-TODO — any edits to existing tests, quoted diff, allowed by TASK.md?
+[OBSERVED] The agent edited three existing expected totals in `tests/test_cart.py` and added three shipping tests in session commit `7b06006`. For example, it changed:
+
+```diff
+-    assert cart.total() == 2160  # 2000 + 8% tax
++    assert cart.total() == 2759  # (2000 + 8% tax) + $5.99 shipping
+```
+
+[OBSERVED] `TASK.md` explicitly permits updating existing expected values for tests that predate shipping, provided the reason is noted in a comment, the changed comments do that. The new tests cover a subtotal above the free-shipping threshold and discounted subtotals above and below it. [OBSERVED: `TASK.md` section 2 and commit `7b06006` diff] [INFERRED] The tests are appropriate coverage for the requested rule, although they do not exercise the exact 5,000-cent boundary because their free-shipping examples start from 6,000 cents.
 
 ### 6. Models
-TODO
+[OBSERVED] Every one of the 14 `model` fields in `session_calls.csv` is `gemini-3.5-flash-lite`, so the explicit `-m gemini-3.5-flash-lite` option kept this recorded session on one model. [OBSERVED] Call #8 has the highest `thoughts_token_count` (931), followed by call #9 (417). Call #8 follows the first successful test result and precedes the agent's status/diff check, call #9 follows that inspection and precedes the final validation run (`session_timeline.txt`). [INFERRED] Those are likely the moments when it was deciding whether the changes were ready to report and whether another full validation was needed.
+
+[OBSERVED: `assignment.md`, Part IV.6] Without `-m`, the assignment specifies that Gemini CLI uses `gemini-3.5-flash-lite` to route requests and `gemini-3.8-flash` for the coding work. [INFERRED] Separating routing from execution lets the CLI use a cheaper, faster model for the repetitive choice of where to send work and reserve the more capable model for substantive implementation. Compared with this pinned lite-only run, an all-larger-model session would plausibly cost more and respond more slowly while improving difficult reasoning or code quality. Because this trace was pinned to one model, those default two-model effects were not observed here.
