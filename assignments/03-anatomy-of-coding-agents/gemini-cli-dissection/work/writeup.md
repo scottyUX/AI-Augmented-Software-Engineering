@@ -13,7 +13,7 @@
 
 ## Part I — Session
 
-**Narrative (one paragraph):** I gave Gemini CLI the assignment's required prompt, and it first stated a plan, read `TASK.md`, and inspected the shopping-cart source and tests. It then used shell commands to run the suite. Its first few attempts could not find an available `python`/`pytest` executable in the inherited shell, so it tried alternatives and eventually used the project environment successfully; it then checked the diff and reran the tests before reporting completion. I did not supply debugging advice, edits, or any other help to the agent. After it finished, I independently entered `python -m pytest -q` in the CLI as required, which also produced 17 passing tests. [OBSERVED: `session_timeline.txt` lines 1–45]
+**Narrative (one paragraph):** I gave Gemini CLI the assignment's required prompt, and it first stated a plan, read `TASK.md`, and inspected the shopping-cart source and tests. It then used shell commands to run the suite. Its first few attempts could not find an available `python`/`pytest` executable in the inherited shell, so it tried alternatives and eventually used the project environment successfully. It then checked the diff and reran the tests before reporting completion. I did not supply debugging advice, edits, or any other help to the agent. After it finished, I independently entered `python -m pytest -q` in the CLI as required, which also produced 17 passing tests. [OBSERVED: `session_timeline.txt` lines 1–45]
 
 | Metric | Value |
 |---|---|
@@ -60,7 +60,7 @@
 
 #### Section: Tool Usage (tool usage)
 > “After receiving a `functionResponse`, you MUST ALWAYS ... Call another tool to proceed with the task [or] Provide a user-facing text response explaining the tool output, your analysis, and next steps.” (`system.md` lines 186–190)
-- **Behavior it produces:** Every tool result has an explicit next action or interpretation; the agent cannot silently drop the result.
+- **Behavior it produces:** Every tool result has an explicit next action or interpretation. The agent cannot silently drop the result.
 - **Failure it prevents:** It prevents stalled loops and makes tool-result handling inspectable by the user.
 
 #### Section: Engineering Standards (project instructions)
@@ -75,7 +75,7 @@
 
 #### Section: Confirmation Protocol
 > “If a tool call is declined or cancelled, respect the decision immediately. Do not re-attempt the action or ‘negotiate’ for the same tool call unless the user explicitly directs you to.” (`system.md` line 214)
-- **Behavior it produces:** A declined permission becomes a boundary; the agent either stops that action or finds a distinct alternative.
+- **Behavior it produces:** A declined permission becomes a boundary. The agent either stops that action or finds a distinct alternative.
 - **Failure it prevents:** It prevents repeated permission prompts that pressure a user into accepting an action.
 
 ### Context injection (`GEMINI.md`)
@@ -88,37 +88,47 @@ The actual project-context text is not in either exported system-prompt copy: se
 ### Inventory
 | Category | Tools | Used in session (count) |
 |---|---|---|
-| File | TODO | TODO |
-| Search | TODO | TODO |
-| Shell | TODO | TODO |
-| Web | TODO | TODO |
-| Memory / other | TODO | TODO |
+| File | `read_file`, `list_directory`, `write_file`, `replace` | `read_file`: 4; all other file tools: 0 |
+| Search | `glob`, `grep_search` | 0 |
+| Shell | `run_shell_command`, `list_background_processes`, `read_background_output` | `run_shell_command`: 9; background tools: 0 |
+| Web | `google_web_search`, `web_fetch` | 0 |
+| Planning / narration | `enter_plan_mode`, `update_topic` | `update_topic`: 6; `enter_plan_mode`: 0 |
+| Delegation | `invoke_agent`, `activate_skill` | 0 |
+| Other | `ask_user` | 0 |
 
-### Tool A: TODO
-- **Source file:** TODO
-- **Schema:**
-  ```
-  TODO
-  ```
-- **Why each parameter:** TODO
-- **Description line that corrects a model mistake:** > TODO. **Mistake:** TODO
-- **Deliberately does not:** TODO
+I ran `/tools` in Gemini CLI v0.64.0 after the captured session. It listed these 16 built-in tools. The usage counts come from the session-summary block in `session_timeline.txt`. [OBSERVED]
 
-### Tool B: TODO
-- **Source file:** TODO
+### Tool A: `replace`
+- **Source file:** [`gemini-3.ts` lines 356–405](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/definitions/model-family-sets/gemini-3.ts#L356-L405), implementation: [`edit.ts` lines 391–421](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/edit.ts#L391-L421).
 - **Schema:**
+  ```text
+  { file_path: string, instruction: string, old_string: string,
+    new_string: string, allow_multiple?: boolean }
   ```
-  TODO
+  `file_path`, `instruction`, `old_string`, and `new_string` are required.
+- **Why each parameter:** `file_path` identifies the target, `instruction` preserves the semantic goal for review and recovery, `old_string` anchors the exact current text, `new_string` supplies the complete replacement, and optional `allow_multiple` makes an intentional all-occurrences edit possible rather than silently broadening a default edit.
+- **Description line that corrects a model mistake:** > “If true, the tool will replace all occurrences of `old_string`. If false (default), it will only succeed if exactly one occurrence is found.” **Mistake:** accidentally changing several identical snippets when the agent intended one surgical edit.
+- **Deliberately does not:** It does not accept omission placeholders in `new_string` such as “rest of methods ...”, the implementation rejects them so an agent cannot replace real code with an incomplete sketch ([`edit.ts` lines 1225–1234](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/edit.ts#L1225-L1234)).
+
+### Tool B: `run_shell_command`
+- **Source file:** [`dynamic-declaration-helpers.ts` lines 36–143](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/definitions/dynamic-declaration-helpers.ts#L36-L143), implementation: [`shell.ts` lines 93–99 and 530–539](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/shell.ts#L93-L99).
+- **Schema:**
+  ```text
+  { command: string, description?: string, dir_path?: string,
+    is_background?: boolean, delay_ms?: integer,
+    additional_permissions?: { network?: boolean,
+      fileSystem?: { read?: string[], write?: string[] } } }
   ```
-- **Why each parameter:** TODO
-- **Description line that corrects a model mistake:** > TODO. **Mistake:** TODO
-- **Deliberately does not:** TODO
+  Only `command` is required. `additional_permissions` appears only when tool sandboxing is enabled, so it was not relevant to this unsandboxed session.
+- **Why each parameter:** `command` is the exact Bash command on macOS/Linux, `description` gives the approval dialog a short user-facing purpose, `dir_path` scopes execution to an existing workspace directory, `is_background` marks long-running servers/watchers, `delay_ms` allows initial background output, and conditional `additional_permissions` asks for narrowly scoped sandbox access after a denial.
+- **Description line that corrects a model mistake:** > “To run a command in the background, set the `is_background` parameter to true. Do NOT use `&` to background commands.” **Mistake:** using shell syntax that bypasses the CLI's background-process tracking and lifecycle.
+- **Deliberately does not:** It does not execute commands containing command-substitution syntax (`$()`, backticks, `<()`, or `>()`). `shell.ts` blocks those forms as injection risks before execution ([`shell.ts` lines 530–539](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/shell.ts#L530-L539)).
 
 ### Why old/new string edits?
-TODO — two reasons plus a trace moment.
+  Exact old/new strings make the target verifiable. The tool can fail rather than edit the wrong duplicate or a file that has changed since the agent read it. They are also efficient and reviewable. A small replacement sends less context and produces a focused diff instead of rewriting a whole file, the Gemini 3 description explicitly says this minimizes token use, simplifies review, and avoids accidental deletion. This session never invoked `replace` (its `/tools` count is zero), all 9 execution calls were `run_shell_command`, including the commands that produced the agent commit. [OBSERVED: `session_timeline.txt` summary and session commit `7b06006`]
 
 ### Per-model tool descriptions
-TODO — tool compared, what differs between model families, why.
+I compared `replace`. Both descriptions use the same schema, but the Gemini 3 version is compact. It emphasizes one-match-by-default behavior, surgical edits, token savings, reviewability, and accidental-deletion avoidance ([`gemini-3.ts` lines 356–405](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/definitions/model-family-sets/gemini-3.ts#L356-L405)). The legacy version adds a much more prescriptive checklist. Read the file first, include three lines of surrounding context, do not escape either string, make `old_string` unique, use detailed why/where/what/outcome instructions, and split complex changes into atomic calls ([`default-legacy.ts` lines 349–425](https://github.com/google-gemini/gemini-cli/blob/v0.64.0/packages/core/src/tools/definitions/model-family-sets/default-legacy.ts#L349-L425)). [OBSERVED] I infer that the older family receives more behavioral scaffolding to reduce brittle edits, while the Gemini 3 family can use a shorter declaration that preserves the core guardrails and saves context. [INFERRED]
 
 ---
 
