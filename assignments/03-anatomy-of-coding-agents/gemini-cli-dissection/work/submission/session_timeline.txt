@@ -25,7 +25,7 @@
 00:31:18  TOOL        run_shell_command [ok] decision=auto_accept args={   "description": "Locate pytest executable",   "command": "find / -n
 00:31:18  REQUEST     model=gemini-3.5-flash-lite
 00:31:19  RESPONSE #7   model=gemini-3.5-flash-lite input=21590 output=76 cached=18250 thoughts=123 ms=1322
-00:31:53  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/thalia_eischeid/AI-Augmented-Software-Engineeri
+00:31:53  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/[REDACTED]/AI-Augmented-Software-Engineeri
 00:31:53  REQUEST     model=gemini-3.5-flash-lite
 00:31:56  RESPONSE #8   model=gemini-3.5-flash-lite input=21853 output=135 cached=18244 thoughts=931 ms=2863
 00:31:56  TOOL        update_topic [ok] decision=accept args={   "summary": "I ran pytest and saw 17 passed. Now I am running git s
@@ -33,7 +33,7 @@
 00:32:00  REQUEST     model=gemini-3.5-flash-lite
 00:32:02  RESPONSE #9   model=gemini-3.5-flash-lite input=24913 output=174 cached=20282 thoughts=417 ms=2073
 00:32:02  TOOL        update_topic [ok] decision=accept args={   "title": "Running Test Suite Validation",   "wait_for_previous": t
-00:32:04  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/thalia_eischeid/AI-Augmented-Software-Engineeri
+00:32:04  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/[REDACTED]/AI-Augmented-Software-Engineeri
 00:32:04  REQUEST     model=gemini-3.5-flash-lite
 00:32:05  RESPONSE #10  model=gemini-3.5-flash-lite input=25655 output=190 cached=22301 thoughts=74 ms=1376
 00:32:05  TOOL        update_topic [ok] decision=accept args={   "strategic_intent": "I am concluding the task by recapping the com
@@ -45,7 +45,7 @@
 00:32:33  TOOL        run_shell_command [ok] decision=auto_accept args={   "description": "Run pytest test suite as requested",   "command": 
 00:32:33  REQUEST     model=gemini-3.5-flash-lite
 00:32:35  RESPONSE #13  model=gemini-3.5-flash-lite input=26759 output=78 cached=24313 thoughts=179 ms=1260
-00:32:36  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/thalia_eischeid/AI-Augmented-Software-Engineeri
+00:32:36  TOOL        run_shell_command [ok] decision=accept args={   "command": "/Users/[REDACTED]/AI-Augmented-Software-Engineeri
 00:32:36  REQUEST     model=gemini-3.5-flash-lite
 00:32:39  RESPONSE #14  model=gemini-3.5-flash-lite input=27080 output=16 cached=24307 thoughts=15 ms=2722
 
