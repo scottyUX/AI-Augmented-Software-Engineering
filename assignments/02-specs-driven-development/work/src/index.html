@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote of the Day</title>
+  <meta name="description" content="Inspirational quotes with on-demand discovery and persistent favoriting.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <!-- Application Header -->
+  <header class="app-header">
+    <h1 class="app-title">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+      </svg>
+      Quote of the Day
+    </h1>
+    <button id="toggle-favorites-btn" class="btn btn-outline" type="button" aria-expanded="false" aria-controls="favorites-drawer" aria-label="Open saved favorites">
+      <svg class="heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      Saved Favorites
+      <span id="favorites-count-badge" class="quote-category-badge" style="display: none; padding: 0.15rem 0.5rem; margin-left: 0.25rem;">0</span>
+    </button>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-content">
+    <!-- Non-intrusive fallback warning for storage-restricted environments -->
+    <aside id="storage-warning" class="storage-warning" role="status" aria-live="polite">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span>Storage is currently in session mode. Favorites will not persist across browser restarts.</span>
+    </aside>
+
+    <!-- Quote Card -->
+    <article id="quote-container" class="quote-card" aria-live="polite">
+      <span id="quote-category" class="quote-category-badge">Inspiration</span>
+      <blockquote id="quote-text" class="quote-blockquote">
+        Loading inspiring quote...
+      </blockquote>
+      <cite id="quote-author" class="quote-author"></cite>
+
+      <!-- Interactive Controls -->
+      <footer class="quote-actions">
+        <button id="favorite-toggle-btn" class="btn-favorite-toggle" type="button" aria-pressed="false" aria-label="Add quote to favorites">
+          <svg class="heart-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button id="new-quote-btn" class="btn btn-primary" type="button" aria-label="Show new quote">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="23 4 23 10 17 10"/>
+            <polyline points="1 20 1 14 7 14"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+          New quote
+        </button>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Favorites Drawer Panel & Backdrop -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="favorites-drawer" class="favorites-drawer" role="region" aria-label="Saved Favorite Quotes" aria-hidden="true">
+    <header class="drawer-header">
+      <h2 class="drawer-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-favorite);" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        Your Favorites
+      </h2>
+      <button id="close-drawer-btn" class="btn btn-outline" type="button" aria-label="Close saved favorites drawer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </header>
+    <div class="drawer-body">
+      <ul id="favorites-list" class="favorites-list" role="list"></ul>
+      <div id="favorites-empty" class="favorites-empty" style="display: none;">
+        <p>No favorite quotes saved yet.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-muted);">
+          Click the heart icon on any quote to save it here!
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Application Bootstrap -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
