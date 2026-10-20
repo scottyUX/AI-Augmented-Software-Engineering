@@ -44,6 +44,9 @@ free Gemini student account** (steps below).
    python --version
    # Note for Linux/macOS users: You may need to run python3 --version instead
    ```
+   
+   > **Windows tip:** After installing a tool with `winget` (Git, Python, GitHub CLI), close and reopen PowerShell before verifying it. The old window won't find the new command. If you already have another Python version (e.g. 3.13), you don't need to remove it: install 3.12 alongside it and verify with `py -3.12 --version`.
+
 
 ## Part 2 — Get a coding agent
 Tip: If you are already using VS Code, you can simply search and install "Google Antigravity" directly as an extension from the VS Code marketplace instead of downloading a standalone application.
