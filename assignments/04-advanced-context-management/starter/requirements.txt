@@ -1,2 +1,2 @@
-mcp
+mcp<2  # SDK 2.x renamed FastMCP -> MCPServer; starter uses the 1.x API
 httpx

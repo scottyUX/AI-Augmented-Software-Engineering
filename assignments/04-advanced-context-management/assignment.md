@@ -23,6 +23,32 @@ cd starter && pip install -r requirements.txt
 python server.py   # runs over STDIO
 ```
 
+> **Note:** `requirements.txt` pins `mcp<2`. In MCP Python SDK 2.x, `FastMCP` was renamed
+> to `MCPServer`, so an unpinned install fails with
+> `ModuleNotFoundError: No module named 'mcp.server.fastmcp'`. If you see that error,
+> run `pip install "mcp<2"`.
+
+> **Common Mistake:** `python server.py` looks like it "hangs" with no output. That is
+> expected: a STDIO server sits waiting for an MCP client to talk to it over
+> stdin/stdout. Don't add `print()` debugging either, since anything written to stdout
+> corrupts the protocol stream (log to stderr instead). Press `Ctrl+C` to stop it.
+
+> **Tip: test your tools before registering the server.** The
+> [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) (needs Node.js)
+> launches your server and lets you call each tool by hand, which is the fastest way to
+> check your error handling in step 3:
+> ```bash
+> # Web UI: opens a browser tab where you can list and call tools
+> npx @modelcontextprotocol/inspector python server.py
+>
+> # CLI: call one tool with a bad input and print the result
+> npx @modelcontextprotocol/inspector --cli python server.py \
+>   --method tools/call --tool-name search_countries --tool-arg query=" "
+> ```
+> Try a blank query, a name that doesn't exist (e.g. `query=Atlantis`), and normal
+> input for both tools. Each one should return a clean, structured message, never a
+> stack trace.
+
 ## What to do
 1. **Study** the provided `search_countries` tool: input validation, the API call,
    error handling, and the model-friendly return shape.
