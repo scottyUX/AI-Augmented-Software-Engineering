@@ -1,3 +1,4 @@
+import uuid
 from fastapi.testclient import TestClient
 
 from main import app
@@ -23,3 +24,27 @@ def test_rejects_bad_url():
 def test_unknown_code_404():
     r = client.get("/does-not-exist", follow_redirects=False)
     assert r.status_code == 404
+
+
+def test_custom_alias_success():
+    alias = f"custom-{uuid.uuid4().hex[:8]}"
+    r = client.post("/shorten", json={"url": "https://example.org/docs", "alias": alias})
+    assert r.status_code == 200
+    assert r.json() == {"code": alias, "short_url": f"/{alias}"}
+
+    r2 = client.get(f"/{alias}", follow_redirects=False)
+    assert r2.status_code == 307
+    assert r2.headers["location"] == "https://example.org/docs"
+
+
+def test_custom_alias_conflict_returns_409():
+    alias = f"taken-{uuid.uuid4().hex[:8]}"
+    r1 = client.post("/shorten", json={"url": "https://example.com/first", "alias": alias})
+    assert r1.status_code == 200
+
+    r2 = client.post("/shorten", json={"url": "https://example.com/second", "alias": alias})
+    assert r2.status_code == 409
+
+    r3 = client.get(f"/{alias}", follow_redirects=False)
+    assert r3.status_code == 307
+    assert r3.headers["location"] == "https://example.com/first"
