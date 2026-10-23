@@ -1,0 +1,24 @@
+### k_shot (empty prompt)
+[FAIL] 'My card was charged twice for order 4412.' -> got "i'm so sorry to hear that your card was charged twice for order 4412. i'd be happy to help you resolve the issue.\n\nto better assist you, could you please provide more information about the order, such as:\n\n* the date and time of the original charge\n* the amount of the original charge\n* the date and time of the duplicate charge\n* the amount of the duplicate charge\n* the payment method used (e.g. credit card, debit card, etc.)\n\nadditionally, have you tried contacting the merchant or the payment processor to report the issue and request a refund for the duplicate charge? if so, what was their response?\n\ni'm here to help you navigate this situation and get your account corrected.", expected 'billing'
+[FAIL] "Where is my package? It's been two weeks." -> got "i'm happy to help you track down your package! two weeks is a reasonable amount of time for a package to take, but i'll need some more information to help you figure out what's going on.\n\ncan you please provide me with the following details:\n\n1. **tracking number**: if you have the tracking number, please share it with me. this will help me look up the status of your package.\n2. **shipping carrier**: was your package shipped via usps, ups, fedex, or another carrier?\n3. **order details**: do you remember the date you placed the order, and the estimated delivery date?\n4. **package contents**: what was in the package, and was it a small item or a larger item that might be taking longer to process?\n\nwith this information, i can try to help you:\n\n* check the tracking status\n* look for any issues or delays\n* provide guidance on what to do next\n\nlet's get your package located!", expected 'shipping'
+[FAIL] 'I want to send the shoes back for a refund.' -> got "to assist you with sending the shoes back for a refund, i'll need some more information. can you please provide the following details:\n\n1. **order number**: what is the order number associated with the shoes you'd like to return?\n2. **reason for return**: is there a specific reason you'd like to return the shoes (e.g., they don't fit, they're not what you expected, etc.)?\n3. **return policy**: have you checked the return policy of the retailer or seller you purchased the shoes from? this will help you understand their specific return and refund process.\n4. **contact information**: do you have the contact information for the retailer or seller, such as their phone number, email address, or return address?\n\nonce i have this information, i can provide you with more tailored guidance on how to initiate the return process and obtain a refund.", expected 'returns'
+[FAIL] 'The app crashes every time I open my cart.' -> got "that's frustrating! let's try to troubleshoot the issue together. can you please provide more details about the problem you're experiencing? here are some questions to help me better understand the issue:\n\n1. **what app are you using** (e.g., online shopping app, e-commerce platform, etc.)?\n2. **what happens when you try to open your cart** (e.g., error message, blank screen, app crashes, etc.)?\n3. **have you made any recent changes** to your account, device, or app settings that might be related to the issue?\n4. **have you tried clearing the app's cache or data** to see if that resolves the problem?\n5. **are you using the latest version of the app**?\n\nany additional information you can provide will help me assist you in resolving the issue.", expected 'technical'
+0/4 correct
+### chain_of_thought (empty prompt)
+[FAIL] 'Bought 10 days ago, unused, not final sale.' -> ?, expected YES
+[FAIL] 'Bought 45 days ago, unused.' -> ?, expected NO
+[FAIL] 'Bought 5 days ago but it was a final-sale item.' -> ?, expected NO
+0/3 correct
+### tool_calling (empty prompt + empty descriptions)
+[PASS] tool called with order_id='4412'
+tool result: shipped, arriving Friday
+### rag (empty prompt, retriever kept)
+[PASS] 'How long do I have to return an item?' -> 'you have 30 days from the date of delivery.'
+[PASS] 'Do you ship internationally?' -> 'yes, we do ship internationally.'
+[FAIL] "What's your CEO's home address?" -> 'i can’t provide that information. is there anything else i can help you with?'
+2/3 correct
+### rag (prompt kept, retriever returns ALL chunks)
+[PASS] 'How long do I have to return an item?' -> 'you may return most items within 30 days of delivery for a full refund.'
+[PASS] 'Do you ship internationally?' -> 'yes, we offer international shipping to most countries, and delivery takes 7-21 '
+[PASS] "What's your CEO's home address?" -> "i'm sorry, i don't know the answer to that based on our help center."
+3/3 correct
