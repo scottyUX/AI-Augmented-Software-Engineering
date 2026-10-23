@@ -1,4 +1,4 @@
-# Week 4 Submission (Structuring a Repo for Agents) — Zuhal Çolak
+# Week 4 Submission (Structuring a Repo for Agents) - Zuhal Çolak
 
 **Repository:** https://github.com/zuhalcolak/week4-agentic-codebase-structure
 

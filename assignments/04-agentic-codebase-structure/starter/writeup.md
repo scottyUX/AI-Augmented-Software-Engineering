@@ -1,4 +1,4 @@
-# Week 4 Writeup — Structuring a Repo for Agents: The Link Shortener
+# Week 4 Writeup - Structuring a Repo for Agents: The Link Shortener
 
 **Student:** Zuhal Çolak  
 **Agent:** Antigravity / Gemini CLI  
