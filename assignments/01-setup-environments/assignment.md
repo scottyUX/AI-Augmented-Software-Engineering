@@ -28,6 +28,14 @@ free Gemini student account** (steps below).
    git config --global user.name "Your Name"
    git config --global user.email "you@example.com"
    ```
+
+   > **Tip — keep your email private:** Your Git commit email may be exposed in public
+   > repositories and pull requests. To hide it, turn on **Keep my email addresses private** in GitHub
+   > **Settings → Emails**, then use the `@users.noreply.github.com` address shown there
+   > (usually `<id>+<username>@users.noreply.github.com`) as your `user.email`. If you use a
+   > regular email instead, add it under Settings → Emails, or your commits won't link to
+   > your GitHub profile.
+   > - **Resource:** [Setting your commit email address](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address)
 2. **GitHub account** — sign up (use your student email) and add an SSH or HTTPS
    credential so you can push. 
    - **Resource:** [Generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
