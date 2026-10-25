@@ -1,0 +1,81 @@
+[
+  {
+    "step": "initialize",
+    "server": "data-explorer",
+    "version": "1.30.0"
+  },
+  {
+    "step": "list_tools",
+    "tools": [
+      "search_countries",
+      "get_country_details"
+    ]
+  },
+  {
+    "step": "call_tool",
+    "tool": "search_countries",
+    "arguments": {
+      "query": "turkey",
+      "limit": 2
+    },
+    "result": {
+      "name": "Türkiye",
+      "capital": "Ankara",
+      "region": "Asia",
+      "population": null
+    }
+  },
+  {
+    "step": "call_tool",
+    "tool": "get_country_details",
+    "arguments": {
+      "name": "Germany"
+    },
+    "result": {
+      "name": "Germany",
+      "official_name": "Federal Republic of Germany",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "languages": [
+        "German"
+      ],
+      "borders": [
+        "AUT",
+        "BEL",
+        "CZE",
+        "DNK",
+        "FRA",
+        "LUX",
+        "NLD",
+        "POL",
+        "CHE"
+      ],
+      "flag_url": "https://flagcdn.com/w320/de.png"
+    }
+  },
+  {
+    "step": "call_tool",
+    "tool": "search_countries",
+    "arguments": {
+      "query": ""
+    },
+    "result": {
+      "error": "query must not be empty"
+    }
+  },
+  {
+    "step": "call_tool",
+    "tool": "get_country_details",
+    "arguments": {
+      "name": "AtlantisCity99"
+    },
+    "result": {
+      "error": "No country found matching 'AtlantisCity99'"
+    }
+  }
+]
