@@ -24,6 +24,7 @@ To keep this to ~3 hours, the feature is **pre-scoped** for you (below).
 ## Setup
 Replace `copilot` with your agent's
 [integration key](https://github.github.io/spec-kit/reference/integrations.html):
+Before running the command, check the linked integration list and replace `copilot` with the exact integration key for your chosen coding agent.
 ```bash
 uv tool install specify-cli
 specify init spec-kit-week2 --integration copilot
