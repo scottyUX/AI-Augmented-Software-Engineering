@@ -113,37 +113,37 @@ You have access to the following specialized skills. To activate a skill and rec
   <skill>
     <name>skill-creator</name>
     <description>Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Gemini CLI's capabilities with specialized knowledge, workflows, or tool integrations.</description>
-    <location>C:\Users\ridha\AppData\Roaming\npm\node_modules\@google\gemini-cli\bundle\builtin\skill-creator\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\AppData\Roaming\npm\node_modules\@google\gemini-cli\bundle\builtin\skill-creator\SKILL.md</location>
   </skill>
   <skill>
     <name>antigravity-support</name>
     <description>Use when the user asks questions, seeks help, or requests instructions related to installing, setting up, or migrating to Antigravity CLI. This skill provides the latest up to date details, requirements, and commands sourced from the official Antigravity CLI documentation.</description>
-    <location>C:\Users\ridha\AppData\Roaming\npm\node_modules\@google\gemini-cli\bundle\builtin\antigravity-support\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\AppData\Roaming\npm\node_modules\@google\gemini-cli\bundle\builtin\antigravity-support\SKILL.md</location>
   </skill>
   <skill>
     <name>troubleshooting</name>
     <description>Uses Chrome DevTools MCP and documentation to troubleshoot connection and target issues. Trigger this skill when list_pages, new_page, or navigate_page fail, or when the server initialization fails.</description>
-    <location>C:\Users\ridha\.gemini\extensions\chrome-devtools-mcp\skills\troubleshooting\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\chrome-devtools-mcp\skills\troubleshooting\SKILL.md</location>
   </skill>
   <skill>
     <name>debug-optimize-lcp</name>
     <description>Guides debugging and optimizing Largest Contentful Paint (LCP) using Chrome DevTools MCP tools. Use this skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions "largest contentful paint", "page load speed", "CWV", or wants to improve how fast their hero image or main content renders.</description>
-    <location>C:\Users\ridha\.gemini\extensions\chrome-devtools-mcp\skills\debug-optimize-lcp\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\chrome-devtools-mcp\skills\debug-optimize-lcp\SKILL.md</location>
   </skill>
   <skill>
     <name>chrome-devtools-cli</name>
     <description>Use this to skill to write shell scripts or run shell commands to automate tasks in the browser or otherwise use Chrome DevTools via CLI.</description>
-    <location>C:\Users\ridha\.gemini\extensions\chrome-devtools-mcp\skills\chrome-devtools-cli\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\chrome-devtools-mcp\skills\chrome-devtools-cli\SKILL.md</location>
   </skill>
   <skill>
     <name>chrome-devtools</name>
     <description>Uses Chrome DevTools via MCP for efficient debugging, troubleshooting and browser automation. Use when debugging web pages, automating browser interactions, analyzing performance, or inspecting network requests. This skill does not apply to `--slim` mode (MCP configuration).</description>
-    <location>C:\Users\ridha\.gemini\extensions\chrome-devtools-mcp\skills\chrome-devtools\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\chrome-devtools-mcp\skills\chrome-devtools\SKILL.md</location>
   </skill>
   <skill>
     <name>a11y-debugging</name>
     <description>Uses Chrome DevTools MCP for accessibility (a11y) debugging and auditing based on web.dev guidelines. Use when testing semantic HTML, ARIA labels, focus states, keyboard navigation, tap targets, and color contrast.</description>
-    <location>C:\Users\ridha\.gemini\extensions\chrome-devtools-mcp\skills\a11y-debugging\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\chrome-devtools-mcp\skills\a11y-debugging\SKILL.md</location>
   </skill>
   <skill>
     <name>find-docs</name>
@@ -151,17 +151,17 @@ You have access to the following specialized skills. To activate a skill and rec
 Use this skill whenever answering technical questions or writing code that interacts with external technologies. This includes libraries, frameworks, programming languages, SDKs, APIs, CLI tools, cloud services, infrastructure tools, and developer platforms.
 Common scenarios: - looking up API endpoints, classes, functions, or method parameters - checking configuration options or CLI commands - answering "how do I" technical questions - generating code that uses a specific library or service - debugging issues related to frameworks, SDKs, or APIs - retrieving setup instructions, examples, or migration guides - verifying version-specific behavior or breaking changes
 Prefer this skill whenever documentation accuracy matters or when model knowledge may be outdated.</description>
-    <location>C:\Users\ridha\.gemini\extensions\context7\skills\find-docs\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\context7\skills\find-docs\SKILL.md</location>
   </skill>
   <skill>
     <name>context7-mcp</name>
     <description>This skill should be used when the user asks about libraries, frameworks, API references, or needs code examples. Activates for setup questions, code generation involving libraries, or mentions of specific frameworks like React, Vue, Next.js, Prisma, Supabase, etc.</description>
-    <location>C:\Users\ridha\.gemini\extensions\context7\skills\context7-mcp\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\context7\skills\context7-mcp\SKILL.md</location>
   </skill>
   <skill>
     <name>context7-cli</name>
     <description>Use the ctx7 CLI to fetch library documentation, manage AI coding skills, and configure Context7 MCP. Activate when the user mentions "ctx7" or "context7", needs current docs for any library, wants to install/search/generate skills, or needs to set up Context7 for their AI coding agent.</description>
-    <location>C:\Users\ridha\.gemini\extensions\context7\skills\context7-cli\SKILL.md</location>
+    <location>C:\Users\[REDACTED]\.gemini\extensions\context7\skills\context7-cli\SKILL.md</location>
   </skill>
 </available_skills>
 
