@@ -1,6 +1,6 @@
 import pytest
 
-from shopcart.pricing import apply_discount, apply_tax
+from shopcart.pricing import apply_discount, apply_tax, calculate_shipping
 
 
 def test_apply_tax():
@@ -22,3 +22,19 @@ def test_fixed_discount_never_negative():
 def test_invalid_code_raises():
     with pytest.raises(ValueError):
         apply_discount(1000, "BOGUS")
+
+
+def test_calculate_shipping_empty():
+    assert calculate_shipping(0) == 0
+
+
+def test_calculate_shipping_fee():
+    assert calculate_shipping(4999) == 599
+
+
+def test_calculate_shipping_free_threshold():
+    assert calculate_shipping(5000) == 0
+
+
+def test_calculate_shipping_free_above():
+    assert calculate_shipping(7500) == 0
