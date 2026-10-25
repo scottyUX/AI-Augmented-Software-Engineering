@@ -40,22 +40,43 @@ def test_invalid_code_raises():
         Cart().apply_code("FREESTUFF")
 
 
-def test_total_includes_tax():
+def test_total_includes_tax_and_shipping():
     cart = Cart()
     cart.add_item("TEE")
-    assert cart.total() == 2160  # 2000 + 8% tax
+    assert cart.total() == 2759  # (2000 + 8% tax) + 599 shipping
 
 
-def test_percent_discount():
+def test_percent_discount_with_shipping():
     cart = Cart()
     cart.add_item("MUG", 2)
     cart.apply_code("SAVE10")
-    assert cart.total() == 2333  # (2400 - 10%) + 8% tax
+    assert cart.total() == 2932  # ((2400 - 10%) + 8% tax) + 599 shipping
 
 
-def test_fixed_discount_applied_before_tax():
+def test_fixed_discount_applied_before_tax_with_shipping():
     cart = Cart()
     cart.add_item("TEE")
     cart.add_item("TEE")
     cart.apply_code("TENOFF")
-    assert cart.total() == 3240  # (4000 - 1000) + 8% tax
+    assert cart.total() == 3839  # ((4000 - 1000) + 8% tax) + 599 shipping
+
+
+def test_free_shipping_threshold():
+    cart = Cart()
+    cart.add_item("TEE", 3)  # subtotal 6000 (>= 5000)
+    assert cart.total() == 6480  # (6000 + 8% tax) + 0 shipping
+
+
+def test_free_shipping_threshold_with_discount():
+    cart = Cart()
+    cart.add_item("TEE", 3)  # subtotal 6000
+    cart.apply_code("SAVE10")  # discounted subtotal 5400 (>= 5000)
+    assert cart.total() == 5832  # (5400 + 8% tax) + 0 shipping
+
+
+def test_discount_brings_subtotal_below_free_shipping():
+    cart = Cart()
+    cart.add_item("TEE", 3)  # subtotal 6000
+    cart.apply_code("SAVE25")  # discounted subtotal 4500 (< 5000) -> shipping applies
+    assert cart.total() == 5459  # (4500 + 8% tax) + 599 shipping
+
