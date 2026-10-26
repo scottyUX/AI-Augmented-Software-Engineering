@@ -9,6 +9,7 @@ Run:
 Test:
     pytest
 """
+import re
 import sqlite3
 import string
 from contextlib import closing
@@ -20,6 +21,8 @@ from pydantic import BaseModel
 
 DB_PATH = Path(__file__).parent / "links.db"
 ALPHABET = string.ascii_letters + string.digits
+RESERVED_CODES = {"shorten", "docs", "redoc", "openapi.json"}
+ALIAS_PATTERN = re.compile(r"^[a-zA-Z0-9_-]{1,32}\Z")
 
 app = FastAPI(title="Link Shortener")
 
@@ -59,18 +62,48 @@ def encode(n: int) -> str:
 
 class ShortenRequest(BaseModel):
     url: str
+    alias: str | None = None
 
 
 @app.post("/shorten")
 def shorten(req: ShortenRequest):
     if not req.url.startswith(("http://", "https://")):
         raise HTTPException(status_code=400, detail="url must start with http:// or https://")
+
     with closing(get_db()) as conn:
-        cur = conn.execute("INSERT INTO links (url) VALUES (?)", (req.url,))
-        row_id = cur.lastrowid
-        code = encode(row_id)
-        conn.execute("UPDATE links SET code = ? WHERE id = ?", (code, row_id))
-        conn.commit()
+        if req.alias is not None:
+            if req.alias.lower() in RESERVED_CODES:
+                raise HTTPException(status_code=409, detail="alias is a reserved route")
+            if not ALIAS_PATTERN.match(req.alias):
+                raise HTTPException(
+                    status_code=400,
+                    detail="alias must be 1-32 characters of letters, digits, hyphens, or underscores",
+                )
+
+            existing = conn.execute("SELECT 1 FROM links WHERE code = ?", (req.alias,)).fetchone()
+            if existing:
+                raise HTTPException(status_code=409, detail="alias already in use")
+
+            try:
+                conn.execute("INSERT INTO links (code, url) VALUES (?, ?)", (req.alias, req.url))
+                conn.commit()
+            except sqlite3.IntegrityError:
+                raise HTTPException(status_code=409, detail="alias already in use")
+            code = req.alias
+        else:
+            cur = conn.execute("INSERT INTO links (url) VALUES (?)", (req.url,))
+            row_id = cur.lastrowid
+            candidate_id = row_id
+            while True:
+                code = encode(candidate_id)
+                existing = conn.execute("SELECT 1 FROM links WHERE code = ?", (code,)).fetchone()
+                if not existing and code.lower() not in RESERVED_CODES:
+                    break
+                candidate_id += 1
+
+            conn.execute("UPDATE links SET code = ? WHERE id = ?", (code, row_id))
+            conn.commit()
+
     return {"code": code, "short_url": f"/{code}"}
 
 
