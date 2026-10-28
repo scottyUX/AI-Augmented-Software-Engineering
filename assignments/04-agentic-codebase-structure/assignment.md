@@ -70,6 +70,17 @@ The recommended tool-neutral option is `tests/AGENTS.md`. It could require:
 
 You may instead use your agent's native scoped-rule feature. For example, some tools support path patterns or file globs.
 
+> **Common mistake.** The starter has no `tests/` folder yet; `test_main.py` lives in the starter root.
+>
+> If you create `tests/` for `tests/AGENTS.md` and move `test_main.py` into it, plain `pytest` fails during collection with `ModuleNotFoundError: No module named 'main'`.
+>
+> Fix: add a `pytest.ini` in `starter/` containing:
+>
+> ```ini
+> [pytest]
+> pythonpath = .
+> ```
+
 In `writeup.md`, explain:
 
 - Which files activate the instruction.
