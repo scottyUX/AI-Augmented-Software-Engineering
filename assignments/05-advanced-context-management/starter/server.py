@@ -69,16 +69,39 @@ def search_countries(query: str, limit: int = 5) -> list[dict]:
     return results
 
 
-# TODO: Implement a SECOND tool, get_country_details(name), returning currencies,
-# languages, borders, and the flag URL. Reuse the error-handling pattern above.
-# Useful fields on each country record:
-#   c["currencies"]  -> {"EUR": {"name": "Euro", "symbol": "€"}, ...}
-#   c["languages"]   -> {"deu": "German", ...}
-#   c["borders"]     -> ["AUT", "BEL", ...]   (cca3 codes of neighbours)
-#   c["cca3"]        -> "DEU"                  (use FLAG_URL.format(cca3=...))
-# @mcp.tool()
-# def get_country_details(name: str) -> dict:
-#     ...
+@mcp.tool()
+def get_country_details(name: str) -> dict:
+    """Get detailed information about a country including currencies, languages, borders, and flag URL."""
+    if not name or not name.strip():
+        return {"error": "name must not be empty"}
+        
+    try:
+        countries = load_countries()
+    except httpx.HTTPError as exc:
+        return {"error": f"upstream request failed: {exc}"}
+        
+    q = name.strip().lower()
+    for c in countries:
+        common = c.get("name", {}).get("common", "").lower()
+        official = c.get("name", {}).get("official", "").lower()
+        
+        if q == common or q == official:
+            # Currencies: map object to list of formatted strings or dictionary
+            currencies = c.get("currencies", {})
+            languages = list(c.get("languages", {}).values()) if c.get("languages") else []
+            borders = c.get("borders", [])
+            cca3 = c.get("cca3", "").lower()
+            flag_url = FLAG_URL.format(cca3=cca3) if cca3 else ""
+            
+            return {
+                "name": c.get("name", {}).get("common"),
+                "currencies": currencies,
+                "languages": languages,
+                "borders": borders,
+                "flag_url": flag_url
+            }
+            
+    return {"error": f"country '{name}' not found"}
 
 
 if __name__ == "__main__":

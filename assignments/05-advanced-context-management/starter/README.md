@@ -34,3 +34,15 @@ Add to your client's MCP config:
 ## Your job
 - Implement `get_country_details(name)` (currencies, languages, borders, flag URL).
 - Make both tools handle empty/invalid input, HTTP errors, timeouts, and no results.
+
+## Tool Reference
+
+### `search_countries(query: str, limit: int = 5)`
+Searches for countries by common or official name.
+- **Input:** `{"query": "canada"}`
+- **Returns:** List of matching countries with basic info (`name`, `capital`, `region`, `subregion`).
+
+### `get_country_details(name: str)`
+Fetches detailed information for an exact country match.
+- **Input:** `{"name": "Japan"}`
+- **Returns:** Detailed dictionary containing `currencies`, `languages`, `borders`, and the `flag_url` SVG link.
