@@ -59,6 +59,7 @@ def encode(n: int) -> str:
 
 class ShortenRequest(BaseModel):
     url: str
+    alias: str | None = None
 
 
 @app.post("/shorten")
@@ -66,11 +67,22 @@ def shorten(req: ShortenRequest):
     if not req.url.startswith(("http://", "https://")):
         raise HTTPException(status_code=400, detail="url must start with http:// or https://")
     with closing(get_db()) as conn:
-        cur = conn.execute("INSERT INTO links (url) VALUES (?)", (req.url,))
-        row_id = cur.lastrowid
-        code = encode(row_id)
-        conn.execute("UPDATE links SET code = ? WHERE id = ?", (code, row_id))
-        conn.commit()
+        if req.alias is not None:
+            existing = conn.execute("SELECT 1 FROM links WHERE code = ?", (req.alias,)).fetchone()
+            if existing is not None:
+                raise HTTPException(status_code=409, detail="alias already taken")
+            try:
+                conn.execute("INSERT INTO links (code, url) VALUES (?, ?)", (req.alias, req.url))
+                conn.commit()
+            except sqlite3.IntegrityError:
+                raise HTTPException(status_code=409, detail="alias already taken")
+            code = req.alias
+        else:
+            cur = conn.execute("INSERT INTO links (url) VALUES (?)", (req.url,))
+            row_id = cur.lastrowid
+            code = encode(row_id)
+            conn.execute("UPDATE links SET code = ? WHERE id = ?", (code, row_id))
+            conn.commit()
     return {"code": code, "short_url": f"/{code}"}
 
 
