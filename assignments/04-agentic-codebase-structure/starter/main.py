@@ -59,12 +59,26 @@ def encode(n: int) -> str:
 
 class ShortenRequest(BaseModel):
     url: str
+    alias: str | None = None
 
 
 @app.post("/shorten")
 def shorten(req: ShortenRequest):
     if not req.url.startswith(("http://", "https://")):
         raise HTTPException(status_code=400, detail="url must start with http:// or https://")
+    if req.alias is not None:
+        try:
+            with closing(get_db()) as conn:
+                conn.execute(
+                    "INSERT INTO links (code, url) VALUES (?, ?)",
+                    (req.alias, req.url),
+                )
+                conn.commit()
+        except sqlite3.IntegrityError as exc:
+            raise HTTPException(status_code=409, detail="alias already in use") from exc
+        code = req.alias
+        return {"code": code, "short_url": f"/{code}"}
+
     with closing(get_db()) as conn:
         cur = conn.execute("INSERT INTO links (url) VALUES (?)", (req.url,))
         row_id = cur.lastrowid
