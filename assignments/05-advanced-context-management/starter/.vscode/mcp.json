@@ -1,0 +1,12 @@
+
+{
+  "servers": {
+    "data-explorer": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/server.py"
+      ]
+    }
+  }
+}
