@@ -1,12 +1,4 @@
-"""Chain-of-thought — refund eligibility.
-
-Task: given the refund policy and an order, decide YES or NO. Use chain-of-thought
-so the model reasons step by step, but make the FINAL line exactly `DECISION: YES`
-or `DECISION: NO` so it can be graded.
-
-Only edit YOUR_SYSTEM_PROMPT.
-Run:  python chain_of_thought.py
-"""
+"""Chain-of-thought prompting — refund eligibility."""
 from ollama import chat
 
 MODEL = "llama3.1:8b"
@@ -17,8 +9,10 @@ POLICY = """Refund policy:
 - Final-sale items are never refundable.
 """
 
-# TODO: Fill this in! Encourage step-by-step reasoning, ending with DECISION: YES/NO.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """Evaluate the order against every rule in the supplied refund
+policy. Briefly state the policy facts that determine eligibility, then put exactly
+one final line in this format: DECISION: YES or DECISION: NO. A final-sale item is
+never eligible, even if the purchase is recent. Do not add text after the decision."""
 
 CASES = [
     ("Bought 10 days ago, unused, not final sale.", "YES"),

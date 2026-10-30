@@ -1,19 +1,29 @@
-"""K-shot prompting — ticket classification.
-
-Task: classify a customer message into one of: billing, shipping, returns,
-technical, other. Use in-context EXAMPLES (k-shot) so the model outputs exactly the
-label, lowercase, with no extra text.
-
-Only edit YOUR_SYSTEM_PROMPT.
-Run:  python k_shot_prompting.py
-"""
+"""K-shot prompting — ticket classification."""
 from ollama import chat
 
 MODEL = "llama3.1:8b"
 NUM_RUNS = 5
 
-# TODO: Fill this in! Include a few labeled examples (k-shot) in the system prompt.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """You are a support-ticket classifier. Classify each customer
+message using the examples below. Reply with exactly one lowercase label and nothing
+else: billing, shipping, returns, technical, or other.
+
+Examples:
+Message: My card was charged twice for order 4412.
+Label: billing
+
+Message: Where is my package? It has been two weeks.
+Label: shipping
+
+Message: I want to send the shoes back for a refund.
+Label: returns
+
+Message: The app crashes every time I open my cart.
+Label: technical
+
+Message: Can I speak with a person about a question?
+Label: other
+"""
 
 CASES = [
     ("My card was charged twice for order 4412.", "billing"),

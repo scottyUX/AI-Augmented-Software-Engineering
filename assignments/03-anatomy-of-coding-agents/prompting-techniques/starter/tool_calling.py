@@ -1,11 +1,4 @@
-"""Tool calling — order lookup.
-
-Task: the model must decide to call the `get_order_status` tool with the order id it
-finds in the user's message, then use the returned status in a short reply.
-
-Fill in YOUR_SYSTEM_PROMPT and the tool schema TODO.
-Run:  python tool_calling.py
-"""
+"""Tool calling — order lookup."""
 from ollama import chat
 
 MODEL = "llama3.1:8b"
@@ -20,17 +13,19 @@ def get_order_status(order_id: str) -> str:
     return FAKE_DB.get(order_id, "not found")
 
 
-# TODO: describe the tool so the model knows when and how to call it.
 TOOLS = [
     {
         "type": "function",
         "function": {
             "name": "get_order_status",
-            "description": "",  # TODO
+            "description": "Look up the current status and estimated delivery for a customer order.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "order_id": {"type": "string", "description": ""},  # TODO
+                    "order_id": {
+                        "type": "string",
+                        "description": "The order identifier supplied by the customer.",
+                    },
                 },
                 "required": ["order_id"],
             },
@@ -38,8 +33,10 @@ TOOLS = [
     }
 ]
 
-# TODO: Fill this in! Tell the model to look up the order before answering.
-YOUR_SYSTEM_PROMPT = ""
+YOUR_SYSTEM_PROMPT = """You are a support assistant. For an order-status question, you
+must call get_order_status with the exact order ID from the customer's message before
+answering. Do not guess or invent status information. Use the tool result to answer
+briefly; if the order is not found, say so."""
 
 
 def run() -> bool:
