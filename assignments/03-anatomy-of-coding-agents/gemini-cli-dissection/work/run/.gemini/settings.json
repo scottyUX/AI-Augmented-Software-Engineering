@@ -1,0 +1,13 @@
+{
+  "general": {
+    "enableAutoUpdate": false,
+    "enableAutoUpdateNotification": false
+  },
+  "telemetry": {
+    "enabled": true,
+    "target": "local",
+    "outfile": "../telemetry.log",
+    "logPrompts": true,
+    "traces": true
+  }
+}
