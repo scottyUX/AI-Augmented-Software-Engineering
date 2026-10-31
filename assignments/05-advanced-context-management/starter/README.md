@@ -1,12 +1,6 @@
-# Starter — Data Explorer MCP Server
+# Data Explorer MCP Server
 
-A `FastMCP` server over the open, no-key **[mledoze/countries](https://github.com/mledoze/countries)**
-dataset (the data REST Countries was built on). `search_countries` is a worked example;
-you implement a second tool and harden both.
-
-> REST Countries' free v3.1 API was retired in October 2026 and its replacement needs an
-> API key, so this starter fetches the dataset directly from GitHub instead. It is still
-> an HTTPS call with real failure modes (timeouts, HTTP errors) to handle.
+A `FastMCP` server over the open **[mledoze/countries](https://github.com/mledoze/countries)** dataset that exposes country search and details tools over STDIO.
 
 ## Setup
 ```bash
@@ -17,20 +11,51 @@ pip install -r requirements.txt
 ```bash
 python server.py
 ```
-This speaks MCP over STDIO. It prints nothing and waits for a client; that is normal.
-Register the command in an MCP client (Claude Desktop or an MCP-aware IDE), then invoke
-the tools from the client's chat.
 
-## Register in Claude Desktop (example)
-Add to your client's MCP config:
+## Register in MCP Client (Claude Desktop / Antigravity)
+Add to your client config:
 ```json
 {
   "mcpServers": {
-    "data-explorer": { "command": "python", "args": ["/absolute/path/to/server.py"] }
+    "data-explorer": {
+      "command": "python",
+      "args": ["/absolute/path/to/server.py"]
+    }
   }
 }
 ```
 
-## Your job
-- Implement `get_country_details(name)` (currencies, languages, borders, flag URL).
-- Make both tools handle empty/invalid input, HTTP errors, timeouts, and no results.
+## Tool Reference
+
+### `search_countries(query: str, limit: int = 5)`
+Search countries by name. Returns `{name, capital, region, subregion}`.
+
+- **Example Input:** `{"query": "germany", "limit": 1}`
+- **Example Output:**
+  ```json
+  [
+    {
+      "name": "Germany",
+      "capital": "Berlin",
+      "region": "Europe",
+      "subregion": "Western Europe"
+    }
+  ]
+  ```
+- **Error (Empty Input):** `[{"error": "query must not be empty"}]`
+
+### `get_country_details(name: str)`
+Get details for a country: currencies, languages, borders, and flag SVG URL.
+
+- **Example Input:** `{"name": "germany"}`
+- **Example Output:**
+  ```json
+  {
+    "name": "Germany",
+    "currencies": {"EUR": {"name": "Euro", "symbol": "€"}},
+    "languages": {"deu": "German"},
+    "borders": ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
+    "flag": "https://raw.githubusercontent.com/mledoze/countries/master/data/deu.svg"
+  }
+  ```
+- **Error (Not Found):** `{"error": "no country found for 'Atlantis'"}`
