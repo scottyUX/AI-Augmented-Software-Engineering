@@ -80,6 +80,48 @@ def search_countries(query: str, limit: int = 5) -> list[dict]:
 # def get_country_details(name: str) -> dict:
 #     ...
 
+@mcp.tool()
+def get_country_details(name: str) -> dict:
+    """Get details for a country: currencies, languages, borders, and flag URL.
+
+    Returns a dict with those fields, or {"error": ...} on failure.
+    """
+    if not name.strip():
+        return {"error": "name must not be empty"}
+    try:
+        countries = load_countries()
+    except httpx.HTTPError as exc:
+        return {"error": f"upstream request failed: {exc}"}
+
+    q = name.strip().lower()
+    matches = [
+        c for c in countries
+        if q == c["name"]["common"].lower()
+        or q == c["name"]["official"].lower()
+        or q == c.get("cca3", "").lower()
+        or q == c.get("cca2", "").lower()
+        or any(q == str(a).lower() for a in c.get("altSpellings", []))
+    ]
+    if not matches:
+        matches = [
+            c for c in countries
+            if q in c["name"]["common"].lower()
+            or q in c["name"]["official"].lower()
+            or any(q in str(a).lower() for a in c.get("altSpellings", []))
+        ]
+    if not matches:
+        return {"error": f"no country found for '{name}'"}
+
+    c = matches[0]
+    cca3 = c.get("cca3", "").lower()
+    return {
+        "name": c.get("name", {}).get("common"),
+        "currencies": c.get("currencies", {}),
+        "languages": c.get("languages", {}),
+        "borders": c.get("borders", []),
+        "flag": FLAG_URL.format(cca3=cca3) if cca3 else None,
+    }
+
 
 if __name__ == "__main__":
     mcp.run()
